@@ -20,7 +20,7 @@ class CreateEventsTable extends Migration
             $table->string('locatie');
             $table->string('organisator');
             $table->string('category');
-            $table->text('contact');
+            $table->text('contact');    
             $table->timestamps();
         });
     }
