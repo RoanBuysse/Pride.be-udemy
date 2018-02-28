@@ -61,7 +61,7 @@
 
                             <div class="col-md-6">
                               
-                               <select name="language" id="language">
+                            <select name="language" id="language">
                                 <option value="NL">NL</option>
                                 <option value="FR">FR</option>
                                 <option value="EN">EN</option>
