@@ -5,7 +5,7 @@
 
    <div class="container-fluid">
        <div class="jumbotron">
-       <h1>News items</h1>
+       <h1>Create news</h1>
     
     </div>
 

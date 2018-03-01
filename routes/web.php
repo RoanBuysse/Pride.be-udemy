@@ -19,5 +19,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/news', 'NewsController@index')->name('news');
+Route::get('/news/create', 'NewsController@create')->name('news');
 Route::get('/events', 'EventsController@index')->name('events');
+Route::get('/events/create', 'EventsController@create')->name('events');
 
