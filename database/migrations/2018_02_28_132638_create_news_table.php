@@ -16,15 +16,15 @@ class CreateNewsTable extends Migration
         Schema::create('news', function (Blueprint $table) {
             $table->increments('id');
             //nl
-            $table->string('languageNl');
+     
             $table->string('titleNl')->unique();
             $table->text('bodyNl');
             //fr
-            $table->string('languageFr');
+          
             $table->string('titleFr')->unique();
             $table->text('bodyFr');
             //eng
-            $table->string('languageEn');
+          
             $table->string('titleEn')->unique();
             $table->text('bodyEn');
             $table->timestamps();

@@ -22,4 +22,10 @@ class EventsController extends Controller
     {
         return view('events.create');
     }
+
+    public function store(Request $request)
+    {
+        $input = $request->all();
+        Events::create($input);
+    }
 }

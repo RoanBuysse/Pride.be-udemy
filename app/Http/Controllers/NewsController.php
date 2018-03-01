@@ -20,4 +20,10 @@ class NewsController extends Controller
     {
         return view('news.create');
     }
+
+    public function store(Request $request)
+    {
+        $input = $request->all();
+       News::create($input);
+    }
 }
