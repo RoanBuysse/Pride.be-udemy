@@ -10,12 +10,10 @@
     </div>
 
     <div class="col-sm-8 col-sm-offset-2">
-    @foreach($news as $news )
-            <h2>{{$news->titleNl}}</h2>
-            <p>{{$news->bodyNl}}</p>
-
-
         
+    @foreach($news as $news )
+            <h2><a href="{{action('NewsController@show', [$news->id])}}">{{$news->titleNl}}</a></h2>
+            <p>{{$news->bodyNl}}</p>
     @endforeach
     
     </div>

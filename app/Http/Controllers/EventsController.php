@@ -27,5 +27,14 @@ class EventsController extends Controller
     {
         $input = $request->all();
         Events::create($input);
+        return back();
+    }
+
+    public function show($id)
+    {
+        $Events = Events::findOrFail($id);
+        // var_dump($Events);
+        return view('events.show', compact('events'));
+
     }
 }

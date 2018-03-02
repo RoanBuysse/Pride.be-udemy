@@ -25,5 +25,14 @@ class NewsController extends Controller
     {
         $input = $request->all();
        News::create($input);
+       return back();
+    }
+
+    public function show($id)
+    {
+        $news = News::findOrFail($id);
+        // var_dump($news);
+        return view('news.show', compact('news'));
+
     }
 }
