@@ -64,6 +64,15 @@
                             </li>
                         @endguest
                     </ul>
+                    <ul class="navbar-nav ml-auto">
+                            @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                <li>
+                                    <a rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                                        {{ $properties['native'] }}
+                                    </a>
+                                </li>
+                            @endforeach
+                        </ul>
                 </div>
             </div>
         </nav>
@@ -71,21 +80,24 @@
         <main class="py-4">
             @yield('content')
         </main>
+       
     </div>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
     <script>
-            /* if(middle=="nl"||middle=="nl/"){console.log("ja")
+            var lang = "{{ LaravelLocalization::getCurrentLocale() }}";
+            console.log(lang);
+            if(lang=="nl"){console.log("ja")
             $(".nl").show();
             }
-            if(middle=="fr"||middle=="fr/"){console.log("oui")
+            if(lang=="fr"){console.log("oui")
             $(".fr").show();
             }
-            if(middle=="en"||middle=="en/"){console.log("yes")
+            if(lang=="en"){console.log("yes")
             $(".en").show();
-            } */
-            
+            } 
 </script>
 </body>
 </html>
+    

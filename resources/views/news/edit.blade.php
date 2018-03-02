@@ -60,6 +60,14 @@
       
             
         {!! Form::close() !!}
+       
+        {!! Form::open(['method' => 'DELETE', 'action' => ['NewsController@destroy', $news->id]]) !!}
+       
+
+        <div class="form-group"></div>
+         
+         {!! Form::submit("Delete Blog", ['class' => 'btn btn-danger']) !!}
+        
     
     </div>
 </div>

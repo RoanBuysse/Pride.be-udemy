@@ -30,13 +30,15 @@ Route::group(
         Route::get('/news/{id}', 'NewsController@show')->name('news');
         Route::get('/news/{id}/edit', 'NewsController@edit')->name('news');
         Route::patch('/news/{id}/edit', 'NewsController@update')->name('news');
+        Route::delete('/news/{id}', 'NewsController@destroy')->name('news');
         // events
         Route::get('/events', 'EventsController@index')->name('events');
         Route::get('/events/create', 'EventsController@create')->name('events');
         Route::post('/events/store', 'EventsController@store')->name('events');
         Route::get('/events/{id}', 'EventsController@show')->name('events');
         Route::get('/events/{id}/edit', 'EventsController@edit')->name('events');
-        Route::patch('/events/{id}/edit', 'EventsController@update')->name('events');        
+        Route::patch('/events/{id}/edit', 'EventsController@update')->name('events');
+        Route::delete('/events/{id}', 'EventsController@destroy')->name('events');        
     });
     
 //test

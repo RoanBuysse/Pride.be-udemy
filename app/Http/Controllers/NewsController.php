@@ -52,4 +52,11 @@ class NewsController extends Controller
         
     }
 
+    public function destroy(Request $request, $id)
+    {
+        $news = News::findOrFail($id);
+        $news->delete($request->all());
+        return redirect('/news');
+    }
+
 }

@@ -80,6 +80,8 @@ return [
 
    
     'locale' => 'en',
+    'locale' => 'nl',
+    'locale' => 'fr',
 
 
     /*
