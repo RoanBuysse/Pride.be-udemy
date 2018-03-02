@@ -13,7 +13,7 @@ class EventsController extends Controller
     public function index()
     {
         $news = Events::all();
-        return view('evetns.index' , compact('events'));
+        return view('events.index' , compact('events'));
         // dd($news);
         // dd($newstranslation);
     }
