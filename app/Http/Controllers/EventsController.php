@@ -37,4 +37,14 @@ class EventsController extends Controller
         return view('events.show', compact('events'));
 
     }
+
+    
+    public function update(Request $request, $id)
+    {
+        $input = $request->all();
+        $events = Events::findOrFail($id);
+        $events->update($input);
+        return back();
+        
+    }
 }

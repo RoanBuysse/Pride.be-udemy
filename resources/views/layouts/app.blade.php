@@ -12,6 +12,9 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <style>
+            .hidden{display: none;}
+    </style>
 </head>
 <body>
     
@@ -72,5 +75,17 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script>
+            /* if(middle=="nl"||middle=="nl/"){console.log("ja")
+            $(".nl").show();
+            }
+            if(middle=="fr"||middle=="fr/"){console.log("oui")
+            $(".fr").show();
+            }
+            if(middle=="en"||middle=="en/"){console.log("yes")
+            $(".en").show();
+            } */
+            
+</script>
 </body>
 </html>

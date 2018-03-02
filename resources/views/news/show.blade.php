@@ -4,8 +4,9 @@
 <main class="container">
 
    <div class="container-fluid">
-       <div class="jumbotron">
-    <article>  
+        <article>  
+       <div class="jumbotron"><a style="float: right;" href={{action('NewsController@edit', [$news->id])}}>Edit</a>
+   
        <h1>{{$news->titleNl}}</h1>
     
     </div>
