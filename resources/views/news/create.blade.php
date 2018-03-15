@@ -55,7 +55,7 @@
         </div>
 
         <div class="form-group">
-                {!! Form::submit("Create a newsitem",['class' => 'form-control']) !!}
+                {!! Form::submit("Create an event",['class' => 'btn btn-primary']) !!}
         </div>
       
             

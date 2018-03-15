@@ -52,9 +52,10 @@ class RegisterController extends Controller
             'name' => 'required|string|max:255',
             'city' => 'required|string|max:255',
             'country' => 'required|string|max:255',
-            // 'language' => 'required|string|max:255',
+            'language' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
+            // 'role_id' => 'required|int|max:255',
         ]);
     }
 
@@ -73,6 +74,7 @@ class RegisterController extends Controller
             'language' => $data['language'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'role_id' => 3,
         ]);
     }
 }

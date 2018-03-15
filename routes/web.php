@@ -38,7 +38,11 @@ Route::group(
         Route::get('/events/{id}', 'EventsController@show')->name('events');
         Route::get('/events/{id}/edit', 'EventsController@edit')->name('events');
         Route::patch('/events/{id}/edit', 'EventsController@update')->name('events');
-        Route::delete('/events/{id}', 'EventsController@destroy')->name('events');        
+        Route::delete('/events/{id}', 'EventsController@destroy')->name('events');
+        //roles
+        Route::get('admin', 'AdminController@index')->name('Admin');
+        Route::get('writer', 'WriterController@index')->name('Writer');      
+            
     });
     
 //test

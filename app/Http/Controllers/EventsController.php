@@ -6,13 +6,11 @@ use Illuminate\Http\Request;
 use App\Events;
 
 class EventsController extends Controller
-
-
 {
 
     public function index()
     {
-        $news = Events::all();
+        $events = Events::all();
         return view('events.index' , compact('events'));
         // dd($news);
         // dd($newstranslation);
@@ -32,13 +30,20 @@ class EventsController extends Controller
 
     public function show($id)
     {
-        $Events = Events::findOrFail($id);
+        $events = Events::findOrFail($id);
         // var_dump($Events);
         return view('events.show', compact('events'));
 
     }
 
     
+    public function edit($id)
+    {
+        $events = Events::findOrFail($id);
+        return view('events.edit', compact('events'));
+    }
+
+
     public function update(Request $request, $id)
     {
         $input = $request->all();
@@ -47,4 +52,12 @@ class EventsController extends Controller
         return back();
         
     }
+
+    public function destroy(Request $request, $id)
+    {
+        $events = Events::findOrFail($id);
+        $events->delete($request->all());
+        return redirect('/events');
+    }
+
 }

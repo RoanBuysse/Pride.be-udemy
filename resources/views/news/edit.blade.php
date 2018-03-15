@@ -55,7 +55,7 @@
         </div>
 
         <div class="form-group">
-                {!! Form::submit("Edit a newsitem",['class' => 'form-control']) !!}
+                {!! Form::submit("Edit newsitem",['class' => 'btn btn-primary']) !!}
         </div>
       
             
@@ -66,7 +66,7 @@
 
         <div class="form-group"></div>
          
-         {!! Form::submit("Delete Blog", ['class' => 'btn btn-danger']) !!}
+         {!! Form::submit("Delete news item", ['class' => 'btn btn-danger']) !!}
         
     
     </div>
