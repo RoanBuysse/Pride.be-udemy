@@ -19,7 +19,7 @@
             @if(LaravelLocalization::getCurrentLocale()=='nl')
                
                @if($category->news->count() > 0)
-               <a href="{{route('news_categories.show', $category->id)}}">{{$category->nameNl}}</a>
+               <a href="{{route('news_categories.show', $category->slug_nl)}}">{{$category->nameNl}}</a>
                 @endif 
            
 
@@ -31,7 +31,7 @@
              @if(LaravelLocalization::getCurrentLocale()=='fr')
                
              @if($category->news->count() > 0)
-             <a href="{{route('news_categories.show', $category->id)}}">{{$category->nameFr}}</a>
+             <a href="{{route('news_categories.show', $category->slug_fr)}}">{{$category->nameFr}}</a>
               @endif 
          
 
@@ -42,7 +42,7 @@
            @if(LaravelLocalization::getCurrentLocale()=='en')
                
            @if($category->news->count() > 0)
-           <a href="{{route('news_categories.show', $category->id)}}">{{$category->nameEn}}</a>
+           <a href="{{route('news_categories.show', $category->slug_en)}}">{{$category->nameEn}}</a>
             @endif 
        
 

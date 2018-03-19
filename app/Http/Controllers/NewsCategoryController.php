@@ -59,11 +59,14 @@ class NewsCategoryController extends Controller
 
 
     
-    public function show($id)
+    public function show($slug)
     {
-        
-        
-       $category = NewsCategory::whereid($id)->first();
+    if(LaravelLocalization::getCurrentLocale()=='nl')
+       {$category = NewsCategory::whereSlugNl($slug)->first();}
+    if(LaravelLocalization::getCurrentLocale()=='en')
+    {$category = NewsCategory::whereSlugEn($slug)->first();}
+    if(LaravelLocalization::getCurrentLocale()=='fr')
+    {$category = NewsCategory::whereSlugFr($slug)->first();}
        return view('Categories.News.show', compact('category'));
     }
 
