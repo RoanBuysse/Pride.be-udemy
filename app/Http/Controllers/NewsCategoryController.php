@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\NewsCategory;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class NewsCategoryController extends Controller
 {
@@ -39,11 +40,11 @@ class NewsCategoryController extends Controller
     {
         $category = new NewsCategory;
         $category->nameNl = $request->nameNl;
-        $category->slugNl = str_slug($request->nameNl);
+        $category->slug_nl = str_slug($request->nameNl);
         $category->nameFr = $request->nameFr;
-        $category->slugFr = str_slug($request->nameFr);
+        $category->slug_fr = str_slug($request->nameFr);
         $category->nameEn = $request->nameEn;
-        $category->slugEn = str_slug($request->nameEn);
+        $category->slug_en = str_slug($request->nameEn);
         $category->save();
         return back();
     }
@@ -55,9 +56,15 @@ class NewsCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+
+    
     public function show($id)
     {
-        //
+        
+        
+       $category = NewsCategory::whereid($id)->first();
+       return view('Categories.News.show', compact('category'));
     }
 
     /**

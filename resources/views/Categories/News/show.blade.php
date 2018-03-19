@@ -5,7 +5,18 @@
 
    <div class="container-fluid">
        <div class="jumbotron">
-       <h1>List of news Categories</h1>
+        {{--  dutch  --}}
+        @if(LaravelLocalization::getCurrentLocale()=='nl')
+       <h1>{{$category->nameNl}}</h1>  
+       @endif
+         {{--  french  --}}
+         @if(LaravelLocalization::getCurrentLocale()=='fr')
+         <h1>{{$category->nameFr}}</h1>  
+         @endif
+           {{--  english  --}}
+        @if(LaravelLocalization::getCurrentLocale()=='en')
+        <h1>{{$category->nameEn}}</h1>  
+        @endif 
     
     </div>
 
@@ -13,40 +24,27 @@
 
 
         
-        @foreach($categories as $category )
+        @foreach($category->news as $news ) 
      
            {{--  dutch  --}}
             @if(LaravelLocalization::getCurrentLocale()=='nl')
                
-               @if($category->news->count() > 0)
-               <a href="{{route('news_categories.show', $category->id)}}">{{$category->nameNl}}</a>
-                @endif 
-           
-
-                
+             <li>{{$news->titleNl}}</li>
+            
              @endif 
                
 
             {{--  french  --}}
              @if(LaravelLocalization::getCurrentLocale()=='fr')
                
-             @if($category->news->count() > 0)
-             <a href="{{route('news_categories.show', $category->id)}}">{{$category->nameFr}}</a>
-              @endif 
-         
+             <li>{{$news->titleFr}}</li>
 
               
            @endif 
 
         {{--  English  --}}
            @if(LaravelLocalization::getCurrentLocale()=='en')
-               
-           @if($category->news->count() > 0)
-           <a href="{{route('news_categories.show', $category->id)}}">{{$category->nameEn}}</a>
-            @endif 
-       
-
-            
+           <li>{{$news->titleEn}}</li>  
          @endif 
         @endforeach
         

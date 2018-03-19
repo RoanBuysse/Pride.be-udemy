@@ -12,9 +12,6 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <style>
-            .hidden{display: none;}
-    </style>
 </head>
 <body>
     
