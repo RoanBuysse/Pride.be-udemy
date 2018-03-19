@@ -14,12 +14,22 @@
 
         
     @foreach($news as $news )
-            <h2 class='nl hidden'><a href="{{action('NewsController@show', [$news->id])}}">{{$news->titleNl}}</a></h2>
-            <p class='nl hidden'>{{$news->bodyNl}}</p>
-            <h2 class='fr hidden'><a href="{{action('NewsController@show', [$news->id])}}">{{$news->titleFr}}</a></h2>
-            <p class='fr hidden'>{{$news->bodyFr}}</p>
-            <h2 class='en hidden'><a href="{{action('NewsController@show', [$news->id])}}">{{$news->titleEn}}</a></h2>
-            <p class='en hidden'>{{$news->bodyEn}}</p>
+    @if(LaravelLocalization::getCurrentLocale()=='nl')
+    <h2><a href="{{action('NewsController@show', [$news->id])}}">{{$news->titleNl}}</a></h2>
+    <p>{{$news->bodyNl}}</p>
+    @endif 
+
+    @if(LaravelLocalization::getCurrentLocale()=='fr')
+    <h2><a href="{{action('NewsController@show', [$news->id])}}">{{$news->titleFr}}</a></h2>
+    <p>{{$news->bodyFr}}</p>
+    @endif 
+
+    @if(LaravelLocalization::getCurrentLocale()=='en')
+    <h2><a href="{{action('NewsController@show', [$news->id])}}">{{$news->titleEn}}</a></h2>
+    <p>{{$news->bodyEn}}</p>
+    @endif 
+            
+           
     @endforeach
     
     </div>

@@ -9,4 +9,10 @@ class Events extends Model
     protected $fillable = [
         'date', 'time', 'organisor', 'titleNl','CategorieNl', 'bodyNl', 'titleFr', 'bodyFr','CategorieFr', 'titleEn', 'bodyEn', 'CategorieEn',
     ];
+
+
+    public function category()
+    {
+        return $this->belogsToMany(Eventscategory::class);
+    }
 }

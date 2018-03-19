@@ -41,7 +41,12 @@ Route::group(
         Route::delete('/events/{id}', 'EventsController@destroy')->name('events');
         //roles
         Route::get('admin', 'AdminController@index')->name('Admin');
-        Route::get('writer', 'WriterController@index')->name('Writer');      
+        Route::get('writer', 'WriterController@index')->name('Writer');
+        
+        //category
+        Route::resource('news_categories', 'NewsCategoryController' );
+        Route::resource('events_categories', 'EventsCategoryController' );
+
             
     });
     

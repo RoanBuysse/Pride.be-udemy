@@ -8,6 +8,12 @@ use App\Events;
 class EventsController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('isAdmin',['except' => ['index','show']]);
+    
+    }
+
     public function index()
     {
         $events = Events::all();

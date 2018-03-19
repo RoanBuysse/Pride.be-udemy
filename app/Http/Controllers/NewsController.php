@@ -8,6 +8,12 @@ use App\News;
 
 class NewsController extends Controller
 {
+
+    public function __construct()
+    {
+      $this->middleware('isWriter',['only' => ['create','edit']]);
+    }
+
     public function index()
     {
         $news = News::all();

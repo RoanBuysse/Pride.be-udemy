@@ -85,19 +85,6 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
-    <script>
-            var lang = "{{ LaravelLocalization::getCurrentLocale() }}";
-            console.log(lang);
-            if(lang=="nl"){console.log("ja")
-            $(".nl").show();
-            }
-            if(lang=="fr"){console.log("oui")
-            $(".fr").show();
-            }
-            if(lang=="en"){console.log("yes")
-            $(".en").show();
-            } 
-</script>
 </body>
 </html>
     

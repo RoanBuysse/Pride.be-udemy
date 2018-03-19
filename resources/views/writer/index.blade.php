@@ -4,7 +4,7 @@
 <main class="container">
 <div class="container-fluid">
         <div class="jumbotron">
-        <h1>Admin Control Panel</h1>
+        <h1>Writer Control Panel</h1>
      
      </div>
  

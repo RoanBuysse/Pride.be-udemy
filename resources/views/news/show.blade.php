@@ -4,23 +4,36 @@
 <main class="container">
 
    <div class="container-fluid">
-        <article>  
+       <article>  
        <div class="jumbotron"><a style="float: right;" href={{action('NewsController@edit', [$news->id])}}>Edit</a>
    
-       <h1  class='nl hidden'>{{$news->titleNl}}</h1>
-       <h1  class='en hidden'>{{$news->titleEn}}</h1>
-       <h1  class='fr hidden'>{{$news->titleFr}}</h1>
-    
-    </div>
+        @if(LaravelLocalization::getCurrentLocale()=='nl')
+        <div class="col-sm-8 col-sm-offset-2"> 
+        <h1>{{$news->titleNl}}</h1>
+            
+            <p>{{$news->bodyNl}}</p>
+            </div>
 
-    <div class="col-sm-8 col-sm-offset-2">
- 
-        <p  class='nl hidden'>{{$news->bodyNl}}</p>
-        <p  class='en hidden'>{{$news->bodyEn}}</p>
-        <p  class='fr hidden'>{{$news->bodyFr}}</p>
+        @endif 
+    
+        @if(LaravelLocalization::getCurrentLocale()=='fr')
+        <div class="col-sm-8 col-sm-offset-2">
+        <h1>{{$news->titleFr}}</h1>
+        <p>{{$news->bodyFr}}</p>
+        </div>
+        @endif 
+    
+        @if(LaravelLocalization::getCurrentLocale()=='en')
+        <div class="col-sm-8 col-sm-offset-2">
+        <h1>{{$news->titleEn}}</h1>
+        <p>{{$news->bodyEn}}</p>
+        </div>
+        @endif 
+       
     </article>  
     
-    </div>
+    
+</div>
 </div>
 
 </main>
