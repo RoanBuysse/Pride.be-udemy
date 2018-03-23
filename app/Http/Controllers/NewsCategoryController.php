@@ -8,7 +8,15 @@ use App\NewsCategory;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class NewsCategoryController extends Controller
+
+
 {
+
+    public function __construct()
+    {
+        $this->middleware('isAdmin',['except' => ['show']]);
+    
+    }
     /**
      * Display a listing of the resource.
      *
@@ -78,7 +86,8 @@ class NewsCategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = NewsCategory::findOrFail($id);
+        return view('categories.news.edit', compact('category'));
     }
 
     /**
@@ -90,7 +99,9 @@ class NewsCategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $category = NewsCategory::findOrFail($id);
+        $category->update($request->all());
+        return redirect('news_categories');
     }
 
     /**
@@ -101,6 +112,8 @@ class NewsCategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $category = NewsCategory::findOrFail($id);
+        $category->delete();
+        return redirect('news_categories');
     }
 }

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Events;
 
+use\App\EventsCategory;
+
 class EventsController extends Controller
 {
 
@@ -24,7 +26,12 @@ class EventsController extends Controller
 
     public function create()
     {
-        return view('events.create');
+        if(LaravelLocalization::getCurrentLocale()=='nl'){ $category = EventsCategory::pluck('nameNl','id');}
+        if(LaravelLocalization::getCurrentLocale()=='en'){ $category = EventsCategory::pluck('nameEn','id');}
+        if(LaravelLocalization::getCurrentLocale()=='fr'){ $category = EventsCategory::pluck('nameFr','id');}
+       
+        
+        return view('news.create', compact('category'));
     }
 
     public function store(Request $request)

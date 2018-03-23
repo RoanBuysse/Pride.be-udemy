@@ -6,9 +6,16 @@ use Illuminate\Http\Request;
 
 use App\EventsCategory;
 
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class EventsCategoryController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('isAdmin',['except' => ['show']]);
+    
+    }
     /**
      * Display a listing of the resource.
      *
@@ -41,11 +48,11 @@ class EventsCategoryController extends Controller
     {
         $category = new EventsCategory;
         $category->nameNl = $request->nameNl;
-        $category->slugNl = str_slug($request->nameNl);
+        $category->slug_nl = str_slug($request->nameNl);
         $category->nameFr = $request->nameFr;
-        $category->slugFr = str_slug($request->nameFr);
+        $category->slug_fr = str_slug($request->nameFr);
         $category->nameEn = $request->nameEn;
-        $category->slugEn = str_slug($request->nameEn);
+        $category->slug_en = str_slug($request->nameEn);
         $category->save();
         return back();
     }
@@ -56,9 +63,15 @@ class EventsCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+    if(LaravelLocalization::getCurrentLocale()=='nl')
+       {$category = EventsCategory::whereSlugNl($slug)->first();}
+    if(LaravelLocalization::getCurrentLocale()=='en')
+    {$category = EventsCategory::whereSlugEn($slug)->first();}
+    if(LaravelLocalization::getCurrentLocale()=='fr')
+    {$category = EventsCategory::whereSlugFr($slug)->first();}
+       return view('Categories.Events.show', compact('category'));
     }
 
     /**
@@ -69,7 +82,8 @@ class EventsCategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = EventsCategory::findOrFail($id);
+        return view('Categories.events.edit', compact('category'));
     }
 
     /**
@@ -81,7 +95,9 @@ class EventsCategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $category = EventsCategory::findOrFail($id);
+        $category->update($request->all());
+        return redirect('events_categories');
     }
 
     /**
@@ -92,6 +108,8 @@ class EventsCategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $category = EventsCategory::findOrFail($id);
+        $category->delete();
+        return redirect('events_categories');
     }
 }

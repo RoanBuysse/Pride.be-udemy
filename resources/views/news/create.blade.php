@@ -12,6 +12,15 @@
     <div class="col-sm-8 col-sm-offset-2">
         {!! Form::open(['method' => 'Post', 'action' => 'NewsController@store']) !!}
         
+        <div class="form-group">
+            
+            {!! Form::label("news_category_id", "Category:")!!}
+            
+            {!! Form::select("news_category_id[]", $news_categories, null, ['id' => 'tag_list','class'=> 'form-control']) !!}
+            
+
+        </div>
+        
         {{--  //nl  --}}
         <h3>Dutch</h3>
         <div class="form-group">
@@ -66,4 +75,5 @@
 
 </main>
 @endsection 
+
 

@@ -22,21 +22,19 @@ class CreateEventsTable extends Migration
            
             $table->string('titleNl')->unique();
             $table->text('bodyNl');
-            $table->text('CategorieNl');
-
+           
       
             
             //fr
           
             $table->string('titleFr')->unique();
             $table->text('bodyFr');
-            $table->text('CategorieFr');
-           
+            
             //eng
            
             $table->string('titleEn')->unique();
             $table->text('bodyEn');
-            $table->text('CategorieEn');
+            
          
             $table->timestamps();
         });

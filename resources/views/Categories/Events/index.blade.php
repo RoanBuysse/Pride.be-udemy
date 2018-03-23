@@ -19,7 +19,7 @@
              @if(LaravelLocalization::getCurrentLocale()=='nl')
                 
                 @if($category->events->count() > 0)
-                <a href="#">{{$category->nameNl}}</a>
+                <a href="{{route('events_categories.show', $category->slug_nl)}}">{{$category->nameNl}}</a>
                  @endif 
             
  
@@ -31,7 +31,7 @@
               @if(LaravelLocalization::getCurrentLocale()=='fr')
                 
               @if($category->events->count() > 0)
-              <a href="#">{{$category->nameFr}}</a>
+              <a href="{{route('events_categories.show', $category->slug_fr)}}">{{$category->nameFr}}</a>
                @endif 
           
  
@@ -42,7 +42,7 @@
             @if(LaravelLocalization::getCurrentLocale()=='en')
                 
             @if($category->events->count() > 0)
-            <a href="#">{{$category->nameEn}}</a>
+            <a href="{{route('events_categories.show', $category->slug_en)}}">{{$category->nameEn}}</a>
              @endif 
         
  

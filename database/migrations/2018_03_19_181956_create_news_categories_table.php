@@ -15,9 +15,9 @@ class CreateNewsCategoriesTable extends Migration
     {
         Schema::create('news_categories', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('slugNl')->unique()->index();
-            $table->string('slugFr')->unique()->index();
-            $table->string('slugEn')->unique()->index();
+            $table->string('slug_nl')->unique()->index();
+            $table->string('slug_fr')->unique()->index();
+            $table->string('slug_en')->unique()->index();
             $table->string('nameNl');
             $table->string('nameFr');
             $table->string('nameEn');

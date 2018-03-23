@@ -7,15 +7,15 @@
        <div class="jumbotron">
         {{--  dutch  --}}
         @if(LaravelLocalization::getCurrentLocale()=='nl')
-       <h1>{{$category->nameNl}}</h1><a href="{{action('NewsCategoryController@edit',[$category->id])}}">Edit</a> 
+       <h1>{{$category->nameNl}}</h1><a href="{{action('EventsCategoryController@edit',[$category->id])}}">Edit</a>   
        @endif
          {{--  french  --}}
          @if(LaravelLocalization::getCurrentLocale()=='fr')
-         <h1>{{$category->nameFr}}</h1><a href="{{action('NewsCategoryController@edit',[$category->id])}}">Edit</a>   
+         <h1>{{$category->nameFr}}</h1><a href="{{action('EventsCategoryController@edit',[$category->id])}}">Edit</a>   
          @endif
            {{--  english  --}}
         @if(LaravelLocalization::getCurrentLocale()=='en')
-        <h1>{{$category->nameEn}}</h1><a href="{{action('NewsCategoryController@edit',[$category->id])}}">Edit</a>   
+        <h1>{{$category->nameEn}}</h1><a href="{{action('EventsCategoryController@edit',[$category->id])}}">Edit</a>   
         @endif 
     
     </div>
@@ -24,13 +24,13 @@
 
 
         
-        @foreach($category->news as $news ) 
+        @foreach($category->events as $events ) 
      
            {{--  dutch  --}}
             @if(LaravelLocalization::getCurrentLocale()=='nl')
                
-             <h2li>{{$news->titleNl}}</h2>
-                <hr>
+             <h2>{{$events->titleNl}}</h2>
+             <hr>
             
              @endif 
                
@@ -38,7 +38,7 @@
             {{--  french  --}}
              @if(LaravelLocalization::getCurrentLocale()=='fr')
                
-             <h2>{{$news->titleFr}}</h2>
+             <h2>{{$events->titleFr}}</h2>
              <hr>
 
               
@@ -46,7 +46,7 @@
 
         {{--  English  --}}
            @if(LaravelLocalization::getCurrentLocale()=='en')
-           <h2>{{$news->titleEn}}</h2>  
+           <h2>{{$events->titleEn}}</h2>  
            <hr>
          @endif 
         @endforeach

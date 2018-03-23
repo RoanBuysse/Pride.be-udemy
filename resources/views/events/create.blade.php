@@ -27,6 +27,15 @@
             {!! Form::text("organisor", null, ['class' => 'form-control']) !!}
         </div>
 
+        <div class="form-group">
+            
+            {!! Form::label("events_category_id", "Category:")!!}
+            
+            {!! Form::select("events_category_id[]", $news_categories, null, ['id' => 'tag_list','class'=> 'form-control']) !!}
+            
+
+        </div>
+
         
         
         {{--  //nl  --}}
@@ -42,11 +51,7 @@
                 {!! Form::textarea("bodyNl", null, ['class' => 'form-control']) !!}
         </div>
 
-        <div class="form-group">
-            {!! Form::label("CategorieNl", "Categorie:") !!}
-            {!! Form::text("CategorieNl", null, ['class' => 'form-control']) !!}
-    </div>
-
+     
         
         {{--  //fr  --}}
         <h3>French</h3>
@@ -60,10 +65,7 @@
                 {!! Form::label("bodyFr", "Content:") !!}
                 {!! Form::textarea("bodyFr", null, ['class' => 'form-control']) !!}
         </div>
-        <div class="form-group">
-            {!! Form::label("CategorieNl", "Categorie:") !!}
-            {!! Form::text("CategorieFr", null, ['class' => 'form-control']) !!}
-    </div>
+      
 
             
         
@@ -81,10 +83,6 @@
             {!! Form::textarea("bodyEn", null, ['class' => 'form-control']) !!}
         </div>
 
-        <div class="form-group">
-            {!! Form::label("CategorieNl", "Categorie:") !!}
-            {!! Form::text ("CategorieEn", null, ['class' => 'form-control']) !!}
-        </div>
 
         <div class="form-group">
                 {!! Form::submit("Create a newsitem",['class' => 'btn btn-primary']) !!}

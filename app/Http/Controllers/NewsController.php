@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\News;
+use App\NewsCategory;
 
 
 class NewsController extends Controller
@@ -24,14 +25,21 @@ class NewsController extends Controller
 
     public function create()
     {
-        return view('news.create');
+        if(LaravelLocalization::getCurrentLocale()=='nl'){ $category = NewsCategory::pluck('nameNl','id');}
+        if(LaravelLocalization::getCurrentLocale()=='en'){ $category = NewsCategory::pluck('nameEn','id');}
+        if(LaravelLocalization::getCurrentLocale()=='fr'){ $category = NewsCategory::pluck('nameFr','id');}
+        return view('news.create', compact('news_categories'));
     }
 
     public function store(Request $request)
     {
-        $input = $request->all();
-       News::create($input);
-       return back();
+       $input = $request->all();
+       $news = News::create($input);
+       
+       if ($categoryIds = $request->news_category_id){
+           $news->category()->sync($categoryIds);
+       }
+        return back();
     }
 
     public function show($id)
