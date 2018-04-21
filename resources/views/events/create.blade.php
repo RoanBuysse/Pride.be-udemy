@@ -92,7 +92,7 @@
 
 
         <div class="form-group">
-                {!! Form::submit("Create a newsitem",['class' => 'btn btn-primary']) !!}
+                {!! Form::submit("Save draft of en event",['class' => 'btn btn-primary']) !!}
         </div>
 
       

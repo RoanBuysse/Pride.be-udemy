@@ -14,7 +14,7 @@ class NewsController extends Controller
     }
     public function index()
     {
-        $news = News::all();
+        $news = News::where('status', 1)->latest()->get();
         return view('news.index' , compact('news'));
         // dd($news);
         // dd($newstranslation);

@@ -10,15 +10,101 @@
     </div>
 
     <div class="col-sm-8 col-sm-offset-2">
-        {{--  <button class="btn btn-primary "><a href={{url('/news/create')}}>Create News Item</a></button>
-        <button class="btn btn-danger "><a href={{url('/news/bin')}}>Trash</a></button>  --}}
         <h2>News</h2>
-        <a href="{{url('/news/create')}}" class="btn btn-primary" role="button">Add newsItem</a>
-        <h2>Events</h2>
-        <a href="{{url('/events/create')}}" class="btn btn-primary" role="button">Add Event</a>
-
-
+        <a href="{{url('/news/create')}}" class="btn btn-warning mijnProg" role="button">Add newsItem</a>
+        <br>
     </div>
+
+    <div class="col-sm-12">
+        <div class="tabel-responsive">
+            <table class="table table-sthiped">
+                    <thead>
+                            <tr>
+                                <th>Title news</th>
+                                <th>Content news</th>
+                                <th>Status</th>
+                              
+                            </tr>
+                        </thead>
+                   
+                    <tbody>
+                        
+                            
+                                    @foreach ($news as $news)
+                                    <tr>
+                                    @if(LaravelLocalization::getCurrentLocale()=='nl')
+                                    <th>{{$news->titleNl}}</th>
+                                    <th>{!!str_limit($news->bodyNl, 100)!!}</th>
+                                    <th>{{$news->status == 0 ? 'Draft':'Published'}}</th>
+                                    @endif 
+                                    @if(LaravelLocalization::getCurrentLocale()=='en')
+                                    <th>{{$news->titleEn}}</th>
+                                    <th>{!!str_limit($news->bodyEn, 100)!!}</th>
+                                    <th>{{$news->status == 0 ? 'Draft':'Published'}}</th>
+                                    @endif 
+                                    @if(LaravelLocalization::getCurrentLocale()=='fr')
+                                    <th>{{$news->titleFr}}</th>
+                                    <th>{!!str_limit($news->bodyFr, 100)!!}</th>
+                                    <th>{{$news->status == 0 ? 'Draft':'Published'}}</th>
+                                    @endif 
+                                </tr>
+                                @endforeach
+                            
+                    </tbody>
+                </table>
+        </div>
+    </div>
+
+
+
+
+<div class="col-sm-8 col-sm-offset-2">
+        <h2>Events</h2>
+        <a href="{{url('/events/create')}}" class="btn btn-warning mijnProg" role="button">Add Event</a>
+        <br>
+    </div>
+
+    <div class="col-sm-12">
+            <div class="tabel-responsive">
+                <table class="table table-sthiped">
+                    <thead>
+                        <tr>
+                                <th>Title events</th>
+                                <th>Content events</th>
+                                <th>Status</th>
+                        </tr>
+                    </thead>
+               
+                <tbody>
+                    
+                                @foreach ($events as $events)
+                                 <tr>
+                                
+                                @if(LaravelLocalization::getCurrentLocale()=='nl')
+                                <th>{{$events->titleNl}}</th>
+                                <th>{!!str_limit($events->bodyNl, 100)!!}</th>
+                                <th>{{$events->status == 0 ? 'Draft':'Published'}}</th>
+                                @endif 
+                                @if(LaravelLocalization::getCurrentLocale()=='en')
+                                <th>{{$events->titleEn}}</th>
+                                <th>{!!str_limit($events->bodyEn, 100)!!}</th>
+                                <th>{{$events->status == 0 ? 'Draft':'Published'}}</th>
+                                @endif 
+                                @if(LaravelLocalization::getCurrentLocale()=='fr')
+                                <th>{{$events->titleFr}}</th>
+                                <th>{!!str_limit($events->bodyFr, 100)!!}</th>
+                                <th>{{$events->status == 0 ? 'Draft':'Published'}}</th>
+                                @endif 
+                                </tr>
+                            @endforeach
+                        
+                </tbody>
+            </table>
+            </div>
+        </div>
+    
+    
+   
 </div>
 
 </main>

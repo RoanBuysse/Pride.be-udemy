@@ -71,7 +71,7 @@
         </div>
 
         <div class="form-group">
-                {!! Form::submit("Create an event",['class' => 'btn btn-primary']) !!}
+                {!! Form::submit("Save a draft of the news item",['class' => 'btn btn-primary']) !!}
         </div>
       
             

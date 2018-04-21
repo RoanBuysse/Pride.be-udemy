@@ -17,6 +17,8 @@ Route::group(
     ],
     function()
     {
+        View::share('news', App\News::all());
+        View::share('events', App\Events::all());
         Route::get('/', function () {
             return view('welcome');
         });

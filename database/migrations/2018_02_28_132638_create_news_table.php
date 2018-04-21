@@ -29,6 +29,7 @@ class CreateNewsTable extends Migration
             $table->text('bodyEn');
             
             $table->integer('photo_id')->nullable();
+            $table->integer('status')->default(0);
             $table->timestamps();
             
         });
