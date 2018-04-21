@@ -44,8 +44,6 @@ Route::group(
         Route::get('writer', 'WriterController@index')->name('Writer');
         
         //category
-        Route::resource('news_categories', 'NewsCategoryController' );
-        Route::resource('events_categories', 'EventsCategoryController' );
 
             
     });
