@@ -15,8 +15,8 @@ class CreateOrganiserTable extends Migration
     {
       Schema::create('organisers', function (Blueprint $table) {
         $table->increments('id');
-        $table->string('slug')->unique()->index();
-        $table->string('name');
+        $table->string('organiser');
+        $table->timestamps();
         
         $table->timestamps();
             

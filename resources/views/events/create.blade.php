@@ -23,8 +23,8 @@
         </div>
         
         <div class="form-group">
-            {!! Form::label("organisor", "Organiser:") !!}
-            {!! Form::text("organisor", null, ['class' => 'form-control']) !!}
+            {!! Form::label("organiser", "Organiser:") !!}
+            {!! Form::text("organiser", null, ['class' => 'form-control']) !!}
         </div>
 
         <div class="form-group">

@@ -46,13 +46,16 @@ class EventsController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
-
+        
+        //photo
         if ($file = $request->file('photo_id')) {
             $name = $file->getClientOriginalName();
             $file->move('images/events', $name);
             $photo = Photo::create(['photo' => $name, 'title' => $name]);
             $input['photo_id'] = $photo->id;
         }
+        //organiser
+        
 
         $events = Events::create($input);
         

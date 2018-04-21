@@ -6,9 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Organiser extends Model
 {
-    protected $fillable=['name', 'slug'];
-    public function news()
-    {
-        return $this->belongsToMany(Events::class, 'organiser_organiser');  
-    }
+   
+    protected $fillable = [
+        'organiser',
+   ];
+   public function news()
+   {
+       $this->belongsTo(News::class);
+   }
+
+   public function Events()
+   {
+       $this->belongsTo(Events::class);
+   }
 }
