@@ -8,6 +8,7 @@
         {{--  dutch  --}}
         @if(LaravelLocalization::getCurrentLocale()=='nl')
        <h1>{{$category->nameNl}}</h1><a href="{{action('NewsCategoryController@edit',[$category->id])}}">Edit</a> 
+       <?php $link = $category->slug_fr; ?>
        @endif
          {{--  french  --}}
          @if(LaravelLocalization::getCurrentLocale()=='fr')

@@ -64,7 +64,7 @@
                     <ul class="navbar-nav ml-auto">
                             @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
                                 <li>
-                                    <a rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                                    <a rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, $link = null, [], true) }}">
                                         {{ $properties['native'] }}
                                     </a>
                                 </li>
