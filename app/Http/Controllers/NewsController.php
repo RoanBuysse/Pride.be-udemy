@@ -5,6 +5,7 @@ use App\News;
 use App\NewsCategory;
 use App\Photo;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use Carbon\Carbon;
 class NewsController extends Controller
 {
     public function __construct()
@@ -39,12 +40,13 @@ class NewsController extends Controller
     {
        $input = $request->all();
 
-       if($file = $request->file('photo_id')){
-           $name = $file->getClientOriginalName();
-           $file->move('images', $name);
-           $photo = Photo::create(['photo' => $name, 'title' => $name]);
-           $input['photo_id'] = $photo->id;
-       }
+       if ($file = $request->file('photo_id')) {
+        $name = $file->getClientOriginalName();
+        $file->move('images', $name);
+        $photo = Photo::create(['photo' => $name, 'title' => $name]);
+        $input['photo_id'] = $photo->id;
+    }
+
 
 
        $news = News::create($input);

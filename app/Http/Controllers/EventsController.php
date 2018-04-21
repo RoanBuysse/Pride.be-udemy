@@ -8,6 +8,7 @@ use App\Events;
 use App\EventsCategory;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use App\Photo;
+use Carbon\Carbon;
 class EventsController extends Controller
 {
 
@@ -46,7 +47,7 @@ class EventsController extends Controller
     {
         $input = $request->all();
 
-        if($file = $request->file('photo_id')){
+        if ($file = $request->file('photo_id')) {
             $name = $file->getClientOriginalName();
             $file->move('images', $name);
             $photo = Photo::create(['photo' => $name, 'title' => $name]);

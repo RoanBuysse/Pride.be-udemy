@@ -283,3 +283,9 @@ section .section-title {
 .btn-block {
     border-radius: 0%;
 }
+/* 
+Custom */
+
+.featured_image{
+    max-width: 100%;
+}

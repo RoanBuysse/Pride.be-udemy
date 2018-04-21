@@ -4,7 +4,15 @@
 <main class="container">
 
 <div class="container-fluid">
-    <article> 
+    <article>
+
+            <div class="col-sm-12 text-center">
+                    @if ($events->photo)
+                   
+                        <img class="featured_image img-responsive" src="/images/{{$events->photo ? $events->photo->photo : ''}}" alt="{{str_limit($events->titleEn, 50)}}">
+     
+                    @endif
+                 </div>  
     {{--  //dutch   --}}
     @if(LaravelLocalization::getCurrentLocale()=='nl')
       <div class="jumbotron"><a style="float: right;" href={{action('EventsController@edit', [$events->id])}}>Edit</a>

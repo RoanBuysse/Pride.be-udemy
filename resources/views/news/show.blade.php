@@ -4,7 +4,14 @@
 <main class="container">
 
    <div class="container-fluid">
-       <article>  
+       <article>
+          <div class="col-sm-12 text-center">
+               @if ($news->photo)
+              
+                   <img class="featured_image img-responsive" src="/images/{{$news->photo ? $news->photo->photo : ''}}" alt="{{str_limit($news->titleEn, 50)}}">
+
+               @endif
+            </div>  
        <div class="jumbotron"><a style="float: right;" href={{action('NewsController@edit', [$news->id])}}>Edit</a>
 
         {{--  dutch  --}}

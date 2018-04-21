@@ -17,6 +17,6 @@ class News extends Model
 
     public function photo()
     {
-        return $this->belongTo(Photo::class);
+        return $this->belongsTo(Photo::class);
     }
 }
