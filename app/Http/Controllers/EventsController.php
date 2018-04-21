@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Events;
 
-use\App\EventsCategory;
-
+use App\EventsCategory;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use App\Photo;
 class EventsController extends Controller
 {
 
@@ -25,21 +26,40 @@ class EventsController extends Controller
     }
 
     public function create()
-    {
-        if(LaravelLocalization::getCurrentLocale()=='nl'){ $category = EventsCategory::pluck('nameNl','id');}
-        if(LaravelLocalization::getCurrentLocale()=='en'){ $category = EventsCategory::pluck('nameEn','id');}
-        if(LaravelLocalization::getCurrentLocale()=='fr'){ $category = EventsCategory::pluck('nameFr','id');}
-       
+    { 
+        if(LaravelLocalization::getCurrentLocale()=='nl')
+        { $events_categories  = EventsCategory::pluck('nameNl','id');
+         return view('events.create', compact('events_categories'));
+        }
+        if(LaravelLocalization::getCurrentLocale()=='fr')
+        { $events_categories  = EventsCategory::pluck('nameFr','id');
+         return view('events.create', compact('events_categories'));
+        }
+        if(LaravelLocalization::getCurrentLocale()=='en')
+        { $events_categories  = EventsCategory::pluck('nameEn','id');
+         return view('events.create', compact('events_categories'));
+        }
         
-        return view('news.create', compact('category'));
-    }
+        }
 
     public function store(Request $request)
     {
         $input = $request->all();
-        Events::create($input);
-        return back();
-    }
+
+        if($file = $request->file('photo_id')){
+            $name = $file->getClientOriginalName();
+            $file->move('images', $name);
+            $photo = Photo::create(['photo' => $name, 'title' => $name]);
+            $input['photo_id'] = $photo->id;
+        }
+
+        $events = Events::create($input);
+        
+        if ($categoryIds = $request->events_category_id){
+            $events->category()->sync($categoryIds);
+        }
+        return redirect('/events');
+     }
 
     public function show($id)
     {
@@ -53,7 +73,19 @@ class EventsController extends Controller
     public function edit($id)
     {
         $events = Events::findOrFail($id);
-        return view('events.edit', compact('events'));
+        if(LaravelLocalization::getCurrentLocale()=='nl')
+        { $events_categories  = EventsCategory::pluck('nameNl','id');
+         
+        }
+        if(LaravelLocalization::getCurrentLocale()=='fr')
+        { $events_categories  = EventsCategory::pluck('nameFr','id');
+     
+        }
+        if(LaravelLocalization::getCurrentLocale()=='en')
+        { $events_categories  = EventsCategory::pluck('nameEn','id');
+    
+        }
+        return view('events.edit', compact('events', 'events_categories'));
     }
 
 
@@ -62,7 +94,10 @@ class EventsController extends Controller
         $input = $request->all();
         $events = Events::findOrFail($id);
         $events->update($input);
-        return back();
+        if ($categoryIds = $request->events_category_id){
+            $events->category()->sync($categoryIds);
+        }
+        return redirect('/events');
         
     }
 
@@ -70,6 +105,8 @@ class EventsController extends Controller
     {
         $events = Events::findOrFail($id);
         $events->delete($request->all());
+        $categoryIds = $request->events_category_id;
+        $events->category()->detach($categoryIds);
         return redirect('/events');
     }
 

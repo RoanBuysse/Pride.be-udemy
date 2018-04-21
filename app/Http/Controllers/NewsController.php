@@ -3,6 +3,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\News;
 use App\NewsCategory;
+use App\Photo;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 class NewsController extends Controller
 {
     public function __construct()
@@ -17,20 +19,40 @@ class NewsController extends Controller
         // dd($newstranslation);
     }
     public function create()
-    {  
-    $news_categories  = NewsCategory::pluck('nameNl','id');
-    return view('news.create', compact('news_categories'));
+    { 
+    if(LaravelLocalization::getCurrentLocale()=='nl')
+    { $news_categories  = NewsCategory::pluck('nameNl','id');
+     return view('news.create', compact('news_categories'));
+    }
+    if(LaravelLocalization::getCurrentLocale()=='fr')
+    { $news_categories  = NewsCategory::pluck('nameFr','id');
+     return view('news.create', compact('news_categories'));
+    }
+    if(LaravelLocalization::getCurrentLocale()=='en')
+    { $news_categories  = NewsCategory::pluck('nameEn','id');
+     return view('news.create', compact('news_categories'));
+    }
+    
     }
     
     public function store(Request $request)
     {
        $input = $request->all();
+
+       if($file = $request->file('photo_id')){
+           $name = $file->getClientOriginalName();
+           $file->move('images', $name);
+           $photo = Photo::create(['photo' => $name, 'title' => $name]);
+           $input['photo_id'] = $photo->id;
+       }
+
+
        $news = News::create($input);
        
        if ($categoryIds = $request->news_category_id){
            $news->category()->sync($categoryIds);
        }
-        return back();
+       return redirect('/news');
     }
     public function show($id)
     {
@@ -41,20 +63,40 @@ class NewsController extends Controller
     public function edit($id)
     {
         $news = News::findOrFail($id);
-        return view('news.edit', compact('news'));
+        if(LaravelLocalization::getCurrentLocale()=='nl')
+        { $news_categories  = NewsCategory::pluck('nameNl','id');
+         
+        }
+        if(LaravelLocalization::getCurrentLocale()=='fr')
+        { $news_categories  = NewsCategory::pluck('nameFr','id');
+         
+        }
+        if(LaravelLocalization::getCurrentLocale()=='en')
+        { $news_categories  = NewsCategory::pluck('nameEn','id');
+       
+        }
+        
+        
+        return view('news.edit', compact('news', 'news_categories'));
     }
     public function update(Request $request, $id)
     {
         $input = $request->all();
         $news = News::findOrFail($id);
         $news->update($input);
-        return back();
+        if ($categoryIds = $request->news_category_id){
+            $news->category()->sync($categoryIds);
+        }
+        return redirect('/news');
+       
         
     }
     public function destroy(Request $request, $id)
     {
         $news = News::findOrFail($id);
         $news->delete($request->all());
+        $categoryIds = $request->news_category_id;
+        $news->category()->detach($categoryIds);
         return redirect('/news');
     }
 }

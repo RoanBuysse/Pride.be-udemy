@@ -3,7 +3,7 @@
 
 <main class="container">
 
-   <div class="container-fluid">
+<div class="container-fluid">
     <article> 
     {{--  //dutch   --}}
     @if(LaravelLocalization::getCurrentLocale()=='nl')
@@ -21,7 +21,10 @@
         <p>{{$events->bodyNl}}</p>
         <br>
         <p>{{$events->organisor}}</p>
-    
+        @foreach($events->category as $category)
+        <p><a href="{{route('events_categories.show', $category->slug_nl)}}">{{$category->nameNl}}</p>
+        @endforeach
+    </div>
     @endif
 
 
@@ -41,8 +44,12 @@
        <p>{{$events->bodyFr}}</p>
        <br>
        <p>{{$events->organisor}}</p>
-   
+       @foreach($events->category as $category)
+       <p><a href="{{route('events_categories.show', $category->slug_fr)}}">{{$category->nameFr}}</p>
+       @endforeach
+    </div>
    @endif
+
 
 
     {{--  //english   --}}
@@ -61,12 +68,16 @@
         <p>{{$events->bodyEn}}</p>
         <br>
         <p>{{$events->organisor}}</p>
-    
+        @foreach($events->category as $category)
+        <p><a href="{{route('events_categories.show', $category->slug_en)}}">{{$category->nameEn}}</p>
+        @endforeach
+    </div>
     @endif
+
     </article>  
     
     </div>
-</div>
+
 
 </main>
 @endsection 

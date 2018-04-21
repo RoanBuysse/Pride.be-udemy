@@ -10,7 +10,7 @@
     </div>
 
     <div class="col-sm-8 col-sm-offset-2">
-        {!! Form::open(['method' => 'Post', 'action' => 'EventsController@store']) !!}
+        {!! Form::open(['method' => 'Post', 'action' => 'EventsController@store', 'files'=>true]) !!}
         <h3>Common info</h3>
         <div class="form-group">
             {!! Form::label("date", "Date:") !!}
@@ -31,9 +31,16 @@
             
             {!! Form::label("events_category_id", "Category:")!!}
             
-            {!! Form::select("events_category_id[]", $news_categories, null, ['id' => 'tag_list','class'=> 'form-control']) !!}
+            {!! Form::select("events_category_id[]", $events_categories, null, ['id' => 'tag_list','class'=> 'form-control']) !!}
             
 
+        </div>
+
+
+        <div class="form-group">
+            {!! Form::label("photo_id", "Featured Image:") !!}
+            {!! Form::file("photo_id",['class' => 'form-control']) !!}
+           
         </div>
 
         

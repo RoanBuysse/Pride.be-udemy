@@ -29,7 +29,7 @@
            {{--  dutch  --}}
             @if(LaravelLocalization::getCurrentLocale()=='nl')
                
-             <h2>{{$events->titleNl}}</h2>
+             <h2><a href="{{action('EventsController@show', [$events->id])}}">{{$events->titleNl}}</a></h2>
              <hr>
             
              @endif 
@@ -38,7 +38,7 @@
             {{--  french  --}}
              @if(LaravelLocalization::getCurrentLocale()=='fr')
                
-             <h2>{{$events->titleFr}}</h2>
+             <h2><a href="{{action('EventsController@show', [$events->id])}}">{{$events->titleFr}}</a></h2>
              <hr>
 
               
@@ -46,7 +46,7 @@
 
         {{--  English  --}}
            @if(LaravelLocalization::getCurrentLocale()=='en')
-           <h2>{{$events->titleEn}}</h2>  
+           <h2><a href="{{action('EventsController@show', [$events->id])}}">{{$events->titleEn}}</a></h2>  
            <hr>
          @endif 
         @endforeach

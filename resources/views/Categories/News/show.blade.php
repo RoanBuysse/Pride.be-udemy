@@ -30,7 +30,7 @@
            {{--  dutch  --}}
             @if(LaravelLocalization::getCurrentLocale()=='nl')
                
-             <h2li>{{$news->titleNl}}</h2>
+             <h2li><a href="{{action('NewsController@show', [$news->id])}}">{{$news->titleNl}}</a></h2>
                 <hr>
             
              @endif 
@@ -39,7 +39,7 @@
             {{--  french  --}}
              @if(LaravelLocalization::getCurrentLocale()=='fr')
                
-             <h2>{{$news->titleFr}}</h2>
+             <h2><a href="{{action('NewsController@show', [$news->id])}}">{{$news->titleFr}}</a></h2>
              <hr>
 
               
@@ -47,7 +47,7 @@
 
         {{--  English  --}}
            @if(LaravelLocalization::getCurrentLocale()=='en')
-           <h2>{{$news->titleEn}}</h2>  
+           <h2><a href="{{action('NewsController@show', [$news->id])}}">{{$news->titleEn}}</a></h2>  
            <hr>
          @endif 
         @endforeach
