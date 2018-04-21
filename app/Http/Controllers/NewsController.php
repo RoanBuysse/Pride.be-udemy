@@ -42,7 +42,7 @@ class NewsController extends Controller
 
        if ($file = $request->file('photo_id')) {
         $name = $file->getClientOriginalName();
-        $file->move('images', $name);
+        $file->move('images/news', $name);
         $photo = Photo::create(['photo' => $name, 'title' => $name]);
         $input['photo_id'] = $photo->id;
     }
@@ -85,6 +85,19 @@ class NewsController extends Controller
     {
         $input = $request->all();
         $news = News::findOrFail($id);
+
+        if ($file = $request->file('photo_id')) {
+
+            if($news->photo){
+                unlink('images/news/'.$news->photo->photo);
+                $news->photo()->delete('photo');
+            }
+            $name = $file->getClientOriginalName();
+            $file->move('images/news', $name);
+            $photo = Photo::create(['photo' => $name, 'title' => $name]);
+            $input['photo_id'] = $photo->id;
+        }
+
         $news->update($input);
         if ($categoryIds = $request->news_category_id){
             $news->category()->sync($categoryIds);
@@ -99,6 +112,10 @@ class NewsController extends Controller
         $news->delete($request->all());
         $categoryIds = $request->news_category_id;
         $news->category()->detach($categoryIds);
-        return redirect('/news');
+        if($news->photo){
+            unlink('images/news/'.$news->photo->photo);
+            $news->photo()->delete('photo');
+        }
+        return back();
     }
 }

@@ -49,7 +49,7 @@ class EventsController extends Controller
 
         if ($file = $request->file('photo_id')) {
             $name = $file->getClientOriginalName();
-            $file->move('images', $name);
+            $file->move('images/events', $name);
             $photo = Photo::create(['photo' => $name, 'title' => $name]);
             $input['photo_id'] = $photo->id;
         }
@@ -94,6 +94,19 @@ class EventsController extends Controller
     {
         $input = $request->all();
         $events = Events::findOrFail($id);
+
+        if ($file = $request->file('photo_id')) {
+
+            if($events->photo){
+                unlink('images/events/'.$events->photo->photo);
+                $events->photo()->delete('photo');
+            }
+            $name = $file->getClientOriginalName();
+            $file->move('images/events', $name);
+            $photo = Photo::create(['photo' => $name, 'title' => $name]);
+            $input['photo_id'] = $photo->id;
+        }
+
         $events->update($input);
         if ($categoryIds = $request->events_category_id){
             $events->category()->sync($categoryIds);
@@ -108,7 +121,11 @@ class EventsController extends Controller
         $events->delete($request->all());
         $categoryIds = $request->events_category_id;
         $events->category()->detach($categoryIds);
-        return redirect('/events');
+        if($events->photo){
+            unlink('images/events/'.$events->photo->photo);
+            $events->photo()->delete('photo');
+        }
+        return back();
     }
 
 }

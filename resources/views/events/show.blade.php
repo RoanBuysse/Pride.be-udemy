@@ -9,7 +9,7 @@
             <div class="col-sm-12 text-center">
                     @if ($events->photo)
                    
-                        <img class="featured_image img-responsive" src="/images/{{$events->photo ? $events->photo->photo : ''}}" alt="{{str_limit($events->titleEn, 50)}}">
+                        <img class="featured_image img-responsive" src="/images/events/{{$events->photo ? $events->photo->photo : ''}}" alt="{{str_limit($events->titleEn, 50)}}">
      
                     @endif
                  </div>  

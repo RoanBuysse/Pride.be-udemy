@@ -10,7 +10,7 @@
     </div>
 
     <div class="col-sm-8 col-sm-offset-2">
-        {!! Form::model($news, ['method' => 'PATCH', 'action' => ['NewsController@update', $news->id]]) !!}
+        {!! Form::model($news, ['method' => 'PATCH', 'action' => ['NewsController@update', $news->id], 'files' =>true]) !!}
 
         <div class="form-group">
             
@@ -19,6 +19,12 @@
             {!! Form::select("news_category_id[]", $news_categories, null, ['id' => 'tag_list','class'=> 'form-control']) !!}
             
 
+        </div>
+
+        <div class="form-group">
+            {!! Form::label("photo_id", "Featured Image:") !!}
+            {!! Form::file("photo_id",['class' => 'form-control']) !!}
+           
         </div>
         
     
