@@ -181,6 +181,7 @@ class EventsController extends Controller
             unlink('images/events/'.$events->photo->photo);
             $events->photo()->delete('photo');
         }
+        Session::flash('flash_message', 'news item succesfully deleted');
         return back();
     }
 

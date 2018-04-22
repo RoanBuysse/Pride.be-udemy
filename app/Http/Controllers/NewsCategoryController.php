@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Session;
 use App\NewsCategory;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
-use Session;
+
 class NewsCategoryController extends Controller
 
 
@@ -140,6 +140,7 @@ class NewsCategoryController extends Controller
     {
         $category = NewsCategory::findOrFail($id);
         $category->delete();
+        Session::flash('flash_message', 'NewsCategory item succesfully deleted');
         return redirect('/news_categories');
     }
 }

@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\EventsCategory;
-
-use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Session;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+
 class EventsCategoryController extends Controller
 {
 
@@ -138,6 +138,7 @@ class EventsCategoryController extends Controller
     {
         $category = EventsCategory::findOrFail($id);
         $category->delete();
+        Session::flash('flash_message', 'Events category item succesfully deleted');
         return redirect('/events_categories');
     }
 }

@@ -11,7 +11,7 @@
 
     <div class="col-sm-8 col-sm-offset-2">
             @include('partials.flashMessage')
-
+ 
 
        
             @foreach($categories as $category )

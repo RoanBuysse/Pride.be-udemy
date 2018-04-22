@@ -56,6 +56,7 @@ Route::group(
 
         //users
         Route::resource('users', 'UserController' );
+        
     });
     
 //test

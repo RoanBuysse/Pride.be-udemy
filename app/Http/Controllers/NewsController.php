@@ -164,6 +164,7 @@ class NewsController extends Controller
             unlink('images/news/'.$news->photo->photo);
             $news->photo()->delete('photo');
         }
+        Session::flash('flash_message', 'news item succesfully deleted');
         return back();
     }
 }
