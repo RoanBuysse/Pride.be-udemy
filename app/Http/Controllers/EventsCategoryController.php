@@ -35,7 +35,8 @@ class EventsCategoryController extends Controller
      */
     public function create()
     {
-        return view('categories.events.create');
+        $categories = EventsCategory::latest()->get();
+        return view('categories.events.create', compact('categories'));
     }
 
     /**

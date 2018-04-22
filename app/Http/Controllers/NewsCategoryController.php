@@ -34,8 +34,9 @@ class NewsCategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        return view('categories.news.create');
+    {   
+        $categories = NewsCategory::latest()->get();
+        return view('categories.news.create', compact('categories'));
     }
 
     /**

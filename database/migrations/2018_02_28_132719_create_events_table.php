@@ -17,7 +17,7 @@ class CreateEventsTable extends Migration
             $table->increments('id');
             $table->date('date');
             $table->time('time');
-            $table->text('organisor');
+            $table->text('organisor')->nullable();
             //nl
            
             $table->string('titleNl')->unique();

@@ -6,10 +6,15 @@
    <div class="container-fluid">
        <div class="jumbotron">
        <h1>Admin Control Panel</h1>
-    
+       <a href="{{url('/users')}}" class="btn btn-warning mijnProg" role="button">See all users</a>
+       <a href="{{url('/events_categories')}}" class="btn btn-warning mijnProg" role="button">Categories for events</a>
+       <a href="{{url('/news_categories')}}" class="btn btn-warning mijnProg" role="button">Categories for news</a>
+
     </div>
 
-    <div class="col-sm-8 col-sm-offset-2">
+    <div class="col-sm-8 col-sm-offset-2 admin-buttons">
+        
+        
         <h2>News</h2>
         <a href="{{url('/news/create')}}" class="btn btn-warning mijnProg" role="button">Add newsItem</a>
         <br>
@@ -33,18 +38,18 @@
                                     @foreach ($news as $news)
                                     <tr>
                                     @if(LaravelLocalization::getCurrentLocale()=='nl')
-                                    <th>{{$news->titleNl}}</th>
-                                    <th>{!!str_limit($news->bodyNl, 100)!!}</th>
+                                    <td>{{$news->titleNl}}</td>
+                                    <td>{!!str_limit($news->bodyNl, 100)!!}</td>
                                   
                                     @endif 
                                     @if(LaravelLocalization::getCurrentLocale()=='en')
-                                    <th>{{$news->titleEn}}</th>
-                                    <th>{!!str_limit($news->bodyEn, 100)!!}</th>
+                                    <td>{{$news->titleEn}}</td>
+                                    <td>{!!str_limit($news->bodyEn, 100)!!}</td>
                                     
                                     @endif 
                                     @if(LaravelLocalization::getCurrentLocale()=='fr')
-                                    <th>{{$news->titleFr}}</th>
-                                    <th>{!!str_limit($news->bodyFr, 100)!!}</th>
+                                    <td>{{$news->titleFr}}</td>
+                                    <td>{!!str_limit($news->bodyFr, 100)!!}</td>
                                    
                                     @endif 
                                 </tr>
@@ -80,18 +85,18 @@
                                  <tr>
                                 
                                 @if(LaravelLocalization::getCurrentLocale()=='nl')
-                                <th>{{$events->titleNl}}</th>
-                                <th>{!!str_limit($events->bodyNl, 100)!!}</th>
+                                <td>{{$events->titleNl}}</td>
+                                <td>{!!str_limit($events->bodyNl, 100)!!}</td>
                                 
                                 @endif 
                                 @if(LaravelLocalization::getCurrentLocale()=='en')
-                                <th>{{$events->titleEn}}</th>
-                                <th>{!!str_limit($events->bodyEn, 100)!!}</th>
+                                <td>{{$events->titleEn}}</td>
+                                <td>{!!str_limit($events->bodyEn, 100)!!}</td>
                               
                                 @endif 
                                 @if(LaravelLocalization::getCurrentLocale()=='fr')
-                                <th>{{$events->titleFr}}</th>
-                                <th>{!!str_limit($events->bodyFr, 100)!!}</th>
+                                <td>{{$events->titleFr}}</td>
+                                <td>{!!str_limit($events->bodyFr, 100)!!}</td>
                                
                                 @endif 
                                 </tr>

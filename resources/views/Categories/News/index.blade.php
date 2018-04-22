@@ -6,6 +6,7 @@
    <div class="container-fluid">
        <div class="jumbotron">
        <h1>List of news Categories</h1>
+       <a href="{{url('/news_categories/create')}}" class="btn btn-warning mijnProg" role="button">Add Categorie</a>
     
     </div>
 
@@ -14,12 +15,12 @@
 
         
         @foreach($categories as $category )
-     
+     <ul class="list-group">
            {{--  dutch  --}}
             @if(LaravelLocalization::getCurrentLocale()=='nl')
                
                @if($category->news->count() > 0)
-               <a href="{{route('news_categories.show', $category->slug_nl)}}">{{$category->nameNl}}</a>
+               <li class="list-group-item"><a href="{{route('news_categories.show', $category->slug_nl)}}">{{$category->nameNl}}</a></li>
                 @endif 
            
 
@@ -31,7 +32,7 @@
              @if(LaravelLocalization::getCurrentLocale()=='fr')
                
              @if($category->news->count() > 0)
-             <a href="{{route('news_categories.show', $category->slug_fr)}}">{{$category->nameFr}}</a>
+             <li class="list-group-item"><a href="{{route('news_categories.show', $category->slug_fr)}}">{{$category->nameFr}}</a></li>
               @endif 
          
 
@@ -42,12 +43,13 @@
            @if(LaravelLocalization::getCurrentLocale()=='en')
                
            @if($category->news->count() > 0)
-           <a href="{{route('news_categories.show', $category->slug_en)}}">{{$category->nameEn}}</a>
+           <li class="list-group-item"><a href="{{route('news_categories.show', $category->slug_en)}}">{{$category->nameEn}}</a></li>
             @endif 
        
 
             
          @endif 
+        </ul>
         @endforeach
         
         </div>
