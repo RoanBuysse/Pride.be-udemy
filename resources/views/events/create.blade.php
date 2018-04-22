@@ -22,10 +22,10 @@
             {!! Form::time("time", null, ['class' => 'form-control']) !!}
         </div>
         
-        <div class="form-group">
+        {{--  <div class="form-group">
             {!! Form::label("organiser", "Organiser:") !!}
             {!! Form::text("organiser", null, ['class' => 'form-control']) !!}
-        </div>
+        </div>  --}}
 
         <div class="form-group">
             

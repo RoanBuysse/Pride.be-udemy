@@ -10,6 +10,10 @@
 |
 */
 
+View::share('news', App\News::all());
+        View::share('events', App\Events::all());
+        View::share('user', App\User::all());
+
 Route::group(
     [
         'prefix' => LaravelLocalization::setLocale(),
@@ -19,6 +23,7 @@ Route::group(
     {
         View::share('news', App\News::all());
         View::share('events', App\Events::all());
+        View::share('user', App\User::all());
         Route::get('/', function () {
             return view('welcome');
         });
@@ -49,7 +54,8 @@ Route::group(
         Route::resource('news_categories', 'NewsCategoryController' );
         Route::resource('events_categories', 'EventsCategoryController' );
 
-            
+        //users
+        Route::resource('users', 'UserController' );
     });
     
 //test

@@ -22,7 +22,7 @@
                             <tr>
                                 <th>Title news</th>
                                 <th>Content news</th>
-                                <th>Status</th>
+                                
                               
                             </tr>
                         </thead>
@@ -35,17 +35,17 @@
                                     @if(LaravelLocalization::getCurrentLocale()=='nl')
                                     <th>{{$news->titleNl}}</th>
                                     <th>{!!str_limit($news->bodyNl, 100)!!}</th>
-                                    <th>{{$news->status == 0 ? 'Draft':'Published'}}</th>
+                                  
                                     @endif 
                                     @if(LaravelLocalization::getCurrentLocale()=='en')
                                     <th>{{$news->titleEn}}</th>
                                     <th>{!!str_limit($news->bodyEn, 100)!!}</th>
-                                    <th>{{$news->status == 0 ? 'Draft':'Published'}}</th>
+                                    
                                     @endif 
                                     @if(LaravelLocalization::getCurrentLocale()=='fr')
                                     <th>{{$news->titleFr}}</th>
                                     <th>{!!str_limit($news->bodyFr, 100)!!}</th>
-                                    <th>{{$news->status == 0 ? 'Draft':'Published'}}</th>
+                                   
                                     @endif 
                                 </tr>
                                 @endforeach
@@ -71,7 +71,6 @@
                         <tr>
                                 <th>Title events</th>
                                 <th>Content events</th>
-                                <th>Status</th>
                         </tr>
                     </thead>
                
@@ -83,17 +82,17 @@
                                 @if(LaravelLocalization::getCurrentLocale()=='nl')
                                 <th>{{$events->titleNl}}</th>
                                 <th>{!!str_limit($events->bodyNl, 100)!!}</th>
-                                <th>{{$events->status == 0 ? 'Draft':'Published'}}</th>
+                                
                                 @endif 
                                 @if(LaravelLocalization::getCurrentLocale()=='en')
                                 <th>{{$events->titleEn}}</th>
                                 <th>{!!str_limit($events->bodyEn, 100)!!}</th>
-                                <th>{{$events->status == 0 ? 'Draft':'Published'}}</th>
+                              
                                 @endif 
                                 @if(LaravelLocalization::getCurrentLocale()=='fr')
                                 <th>{{$events->titleFr}}</th>
                                 <th>{!!str_limit($events->bodyFr, 100)!!}</th>
-                                <th>{{$events->status == 0 ? 'Draft':'Published'}}</th>
+                               
                                 @endif 
                                 </tr>
                             @endforeach
