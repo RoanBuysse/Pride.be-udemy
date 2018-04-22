@@ -11,6 +11,7 @@
 
     <div class="col-sm-8 col-sm-offset-2">
         {!! Form::model($events, ['method' => 'PATCH', 'action' => ['EventsController@update', $events->id],'files' =>true]) !!} 
+        @include('partials.errorMessage')
         
         <h3>Common info</h3>
         <div class="form-group">
@@ -92,6 +93,7 @@
         
         
         <div class="form-group">
+            
                 {!! Form::submit("Edit event",['class' => 'btn btn-primary']) !!}
         </div>
 

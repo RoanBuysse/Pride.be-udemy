@@ -6,6 +6,7 @@ use App\NewsCategory;
 use App\Photo;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Carbon\Carbon;
+use Session;
 class NewsController extends Controller
 {
     public function __construct()
@@ -23,23 +24,42 @@ class NewsController extends Controller
     { 
     if(LaravelLocalization::getCurrentLocale()=='nl')
     { $news_categories  = NewsCategory::pluck('nameNl','id');
-     return view('news.create', compact('news_categories'));
+     
     }
     if(LaravelLocalization::getCurrentLocale()=='fr')
     { $news_categories  = NewsCategory::pluck('nameFr','id');
-     return view('news.create', compact('news_categories'));
+ 
     }
     if(LaravelLocalization::getCurrentLocale()=='en')
     { $news_categories  = NewsCategory::pluck('nameEn','id');
-     return view('news.create', compact('news_categories'));
+     
     }
-    
+    return view('news.create', compact('news_categories'));
     }
     
     public function store(Request $request)
     {
-       $input = $request->all();
+       $rules = [
+        'titleNl' => ['required', 'min:5', 'max:200'],
+        'titleFr' => ['required', 'min:5', 'max:200'],
+        'titleEn' => ['required', 'min:5', 'max:200'],
 
+        'photo_id' => ['mimes:jpeg,jpg,png', 'max:6000'],
+
+        'bodyNl' => ['required', 'min:10'],
+        'bodyFr' => ['required', 'min:10'],
+        'bodyEn' => ['required', 'min:10'],
+
+       ];
+       
+       $message =[
+        'photo_id.mimes' => 'Your image must be jpeg, jpg or png',
+        'photo_id.max' => 'Your image can be no larger than 6mb',
+        ];
+
+       $this->validate($request, $rules);
+       
+       $input = $request->all();
        if ($file = $request->file('photo_id')) {
         $name = $file->getClientOriginalName();
         $file->move('images/news', $name);
@@ -54,6 +74,10 @@ class NewsController extends Controller
        if ($categoryIds = $request->news_category_id){
            $news->category()->sync($categoryIds);
        }
+
+       
+       Session::flash('flash_message', 'News item succesfully created');
+       
        return redirect('/news');
     }
     public function show($id)
@@ -83,6 +107,28 @@ class NewsController extends Controller
     }
     public function update(Request $request, $id)
     {
+
+        $rules = [
+            'titleNl' => ['required', 'min:5', 'max:200'],
+            'titleFr' => ['required', 'min:5', 'max:200'],
+            'titleEn' => ['required', 'min:5', 'max:200'],
+    
+            'photo_id' => ['mimes:jpeg,jpg,png', 'max:6000'],
+    
+            'bodyNl' => ['required', 'min:10'],
+            'bodyFr' => ['required', 'min:10'],
+            'bodyEn' => ['required', 'min:10'],
+    
+           ];
+           
+           $message =[
+            'photo_id.mimes' => 'Your image must be jpeg, jpg or png',
+            'photo_id.max' => 'Your image can be no larger than 6mb',
+            ];
+
+            $this->validate($request, $rules);
+
+
         $input = $request->all();
         $news = News::findOrFail($id);
 
@@ -102,6 +148,8 @@ class NewsController extends Controller
         if ($categoryIds = $request->news_category_id){
             $news->category()->sync($categoryIds);
         }
+        Session::flash('flash_message', 'News item succesfully updated');
+
         return redirect('/news');
        
         

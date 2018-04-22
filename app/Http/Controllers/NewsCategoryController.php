@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\NewsCategory;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
-
+use Session;
 class NewsCategoryController extends Controller
 
 
@@ -47,6 +47,17 @@ class NewsCategoryController extends Controller
      */
     public function store(Request $request)
     {
+
+        $rules = [
+            'nameNl' => ['required', 'max:200', 'unique:news_categories'],
+            'nameFr' => ['required', 'max:200', 'unique:news_categories'],
+            'nameEn' => ['required', 'max:200', 'unique:news_categories'],
+           ];
+           
+    
+            $this->validate($request, $rules);
+
+
         $category = new NewsCategory;
         $category->nameNl = $request->nameNl;
         $category->slug_nl = str_slug($request->nameNl);
@@ -55,7 +66,9 @@ class NewsCategoryController extends Controller
         $category->nameEn = $request->nameEn;
         $category->slug_en = str_slug($request->nameEn);
         $category->save();
-        return back();
+        Session::flash('flash_message', 'Category succefully created');
+        
+        return redirect('/news_categories');
     }
 
 
@@ -100,9 +113,21 @@ class NewsCategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        $rules = [
+            'nameNl' => ['required', 'max:200'],
+            'nameFr' => ['required', 'max:200'],
+            'nameEn' => ['required', 'max:200'],
+           ];
+           
+    
+            $this->validate($request, $rules);
+
+
         $category = NewsCategory::findOrFail($id);
         $category->update($request->all());
-        return redirect('news_categories');
+        Session::flash('flash_message', 'Category succefully edited');
+        return redirect('/news_categories');
     }
 
     /**
@@ -115,6 +140,6 @@ class NewsCategoryController extends Controller
     {
         $category = NewsCategory::findOrFail($id);
         $category->delete();
-        return redirect('news_categories');
+        return redirect('/news_categories');
     }
 }

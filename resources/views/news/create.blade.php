@@ -6,11 +6,14 @@
    <div class="container-fluid">
        <div class="jumbotron">
        <h1>Create news</h1>
+
     
     </div>
 
     <div class="col-sm-8 col-sm-offset-2">
         {!! Form::open(['method' => 'Post', 'action' => 'NewsController@store', 'files'=>true]) !!}
+        
+        @include('partials.errorMessage')
         
         <div class="form-group">
             

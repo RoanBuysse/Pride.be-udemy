@@ -11,7 +11,7 @@
 
     <div class="col-sm-8 col-sm-offset-2">
         {!! Form::open(['method' => 'Post', 'action' => 'EventsCategoryController@store']) !!}
-        
+        @include('partials.errorMessage')
         {{--  //nl  --}}
         <h3>Dutch</h3>
         <div class="form-group">

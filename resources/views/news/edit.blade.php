@@ -11,7 +11,7 @@
 
     <div class="col-sm-8 col-sm-offset-2">
         {!! Form::model($news, ['method' => 'PATCH', 'action' => ['NewsController@update', $news->id], 'files' =>true]) !!}
-
+        @include('partials.errorMessage')
         <div class="form-group">
             
             {!! Form::label("news_category_id", "Category:")!!}

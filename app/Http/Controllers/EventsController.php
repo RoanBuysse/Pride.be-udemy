@@ -9,6 +9,7 @@ use App\EventsCategory;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use App\Photo;
 use Carbon\Carbon;
+use Session;
 class EventsController extends Controller
 {
 
@@ -45,6 +46,31 @@ class EventsController extends Controller
 
     public function store(Request $request)
     {
+
+        $rules = [
+
+            'date' => ['required'],
+            'time' => ['required'],
+            'photo_id' => ['required', 'mimes:jpeg,jpg,png', 'max:6000'],
+
+            'titleNl' => ['required', 'min:5', 'max:200'],
+            'titleFr' => ['required', 'min:5', 'max:200'],
+            'titleEn' => ['required', 'min:5', 'max:200'],
+ 
+            'bodyNl' => ['required', 'min:10'],
+            'bodyFr' => ['required', 'min:10'],
+            'bodyEn' => ['required', 'min:10'],
+ 
+        ];
+
+        $message =[
+            'photo_id.mimes' => 'Your image must be jpeg, jpg or png',
+            'photo_id.max' => 'Your image can be no larger than 6mb',
+       ];
+       
+        $this->validate($request, $rules);
+
+
         $input = $request->all();
         
         //photo
@@ -62,6 +88,9 @@ class EventsController extends Controller
         if ($categoryIds = $request->events_category_id){
             $events->category()->sync($categoryIds);
         }
+
+        Session::flash('flash_message', 'Event item succesfully created');
+
         return redirect('/events');
      }
 
@@ -94,7 +123,28 @@ class EventsController extends Controller
 
 
     public function update(Request $request, $id)
+
     {
+        $rules = [
+            'titleNl' => ['required', 'min:5', 'max:200'],
+            'titleFr' => ['required', 'min:5', 'max:200'],
+            'titleEn' => ['required', 'min:5', 'max:200'],
+    
+            'photo_id' => ['mimes:jpeg,jpg,png', 'max:6000'],
+    
+            'bodyNl' => ['required', 'min:10'],
+            'bodyFr' => ['required', 'min:10'],
+            'bodyEn' => ['required', 'min:10'],
+    
+           ];
+           
+           $message =[
+            'photo_id.mimes' => 'Your image must be jpeg, jpg or png',
+            'photo_id.max' => 'Your image can be no larger than 6mb',
+            ];
+    
+            $this->validate($request, $rules);
+
         $input = $request->all();
         $events = Events::findOrFail($id);
 
@@ -114,12 +164,15 @@ class EventsController extends Controller
         if ($categoryIds = $request->events_category_id){
             $events->category()->sync($categoryIds);
         }
+
+        Session::flash('flash_message', 'Events item succesfully updated');
+
         return redirect('/events');
         
     }
 
     public function destroy(Request $request, $id)
-    {
+    {   
         $events = Events::findOrFail($id);
         $events->delete($request->all());
         $categoryIds = $request->events_category_id;

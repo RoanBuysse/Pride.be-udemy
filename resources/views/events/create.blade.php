@@ -1,16 +1,20 @@
 @extends('layouts.app')
 @section ('content')
 
+
 <main class="container">
 
    <div class="container-fluid">
        <div class="jumbotron">
        <h1>Create event</h1>
+           
     
     </div>
 
     <div class="col-sm-8 col-sm-offset-2">
         {!! Form::open(['method' => 'Post', 'action' => 'EventsController@store', 'files'=>true]) !!}
+        @include('partials.errorMessage')
+        
         <h3>Common info</h3>
         <div class="form-group">
             {!! Form::label("date", "Date:") !!}

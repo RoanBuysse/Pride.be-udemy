@@ -11,7 +11,7 @@
 
     <div class="col-sm-8 col-sm-offset-2">
         {!! Form::model($category,['method' => 'PATCH', 'action' => ['EventsCategoryController@update', $category->id]]) !!}
-        
+        @include('partials.errorMessage')
         {{--  //nl  --}}
         <h3>Dutch</h3>
         <div class="form-group">

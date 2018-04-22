@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\EventsCategory;
 
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
-
+use Session;
 class EventsCategoryController extends Controller
 {
 
@@ -35,6 +35,7 @@ class EventsCategoryController extends Controller
      */
     public function create()
     {
+
         $categories = EventsCategory::latest()->get();
         return view('categories.events.create', compact('categories'));
     }
@@ -47,6 +48,17 @@ class EventsCategoryController extends Controller
      */
     public function store(Request $request)
     {
+
+
+        $rules = [
+            'nameNl' => ['required', 'max:200', 'unique:events_categories'],
+            'nameFr' => ['required', 'max:200', 'unique:events_categories'],
+            'nameEn' => ['required', 'max:200', 'unique:events_categories'],
+           ];
+            $this->validate($request, $rules);
+
+
+
         $category = new EventsCategory;
         $category->nameNl = $request->nameNl;
         $category->slug_nl = str_slug($request->nameNl);
@@ -55,7 +67,10 @@ class EventsCategoryController extends Controller
         $category->nameEn = $request->nameEn;
         $category->slug_en = str_slug($request->nameEn);
         $category->save();
-        return back();
+
+        Session::flash('flash_message', 'Category succefully created');
+        
+        return redirect('events_categories');
     }
 
     /**
@@ -96,9 +111,21 @@ class EventsCategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        $rules = [
+            'nameNl' => ['required', 'max:200'],
+            'nameFr' => ['required', 'max:200'],
+            'nameEn' => ['required', 'max:200'],
+           ];
+           
+    
+            $this->validate($request, $rules);
+
+
         $category = EventsCategory::findOrFail($id);
         $category->update($request->all());
-        return redirect('events_categories');
+        Session::flash('flash_message', 'Category succefully edited');
+        return redirect('/events_categories');
     }
 
     /**
@@ -111,6 +138,6 @@ class EventsCategoryController extends Controller
     {
         $category = EventsCategory::findOrFail($id);
         $category->delete();
-        return redirect('events_categories');
+        return redirect('/events_categories');
     }
 }
