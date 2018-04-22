@@ -35,7 +35,7 @@ class CreateEventsTable extends Migration
             $table->string('titleEn')->unique();
             $table->text('bodyEn');
             
-            $table->integer('status')->default(0);
+         
             $table->integer('photo_id')->nullable();
             $table->timestamps();
         });

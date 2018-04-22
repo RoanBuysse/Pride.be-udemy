@@ -20,7 +20,7 @@ class EventsController extends Controller
 
     public function index()
     {
-        $events = Events::where('status', 1)->latest()->get();
+        $events = Events::latest()->get();
         return view('events.index' , compact('events'));
         // dd($news);
         // dd($newstranslation);
