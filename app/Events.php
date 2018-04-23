@@ -23,7 +23,7 @@ class Events extends Model
     
     public function favourites()
 {
-    return $this->morphToMany(User::class, 'favouriteables');
+    return $this->belongsToMany(User::class, 'favouriteables');
 }
 
 public function favouritedBy(User $user)

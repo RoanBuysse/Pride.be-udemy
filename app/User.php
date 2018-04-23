@@ -35,7 +35,9 @@ class User extends Authenticatable
     
     public function favouriteEvents()
     {
-    return $this->belongsToMany(Events::class, 'favouriteables');
+    return $this->belongsToMany(Events::class, 'favouriteables')
+                ->withPivot(['created_at'])
+                ->orderBy('pivot_created_at', 'desc');
                
     }
  

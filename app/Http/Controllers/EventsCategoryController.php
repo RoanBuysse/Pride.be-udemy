@@ -82,7 +82,7 @@ class EventsCategoryController extends Controller
     public function show($slug)
     {
     if(LaravelLocalization::getCurrentLocale()=='nl')
-       {$category = EventsCategory::whereSlugNl($slug)->first();}
+    {$category = EventsCategory::whereSlugNl($slug)->first();}
     if(LaravelLocalization::getCurrentLocale()=='en')
     {$category = EventsCategory::whereSlugEn($slug)->first();}
     if(LaravelLocalization::getCurrentLocale()=='fr')

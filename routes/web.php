@@ -58,11 +58,8 @@ Route::group(
 
         //likes
         Route::post('/events/{id}/favourites', 'AgendaController@store')->name('agenda.fav.store');
+        Route::get('/agenda', 'AgendaController@index');
 
-
-        
-
-        
     });
     
 //test
