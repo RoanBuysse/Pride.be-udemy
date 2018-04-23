@@ -12,15 +12,19 @@
     <div class="col-sm-8 col-sm-offset-2">
 
                 @if($events->count())
-                @foreach($getEventsCollection as $getEventsCollection)
+              
                   
                     <article>
                        
-                            {{$getEventsCollection}}
+                            @foreach($newCollection as $newCollection)
+                          
+                            <p>{{$newCollection->titleNl}}</p>
+                            
+                           @endforeach
                     
                     </article>
                     
-                @endforeach
+           
 
                 
                 
