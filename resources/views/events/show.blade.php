@@ -10,8 +10,22 @@
                     @if ($events->photo)
                    
                         <img class="featured_image img-responsive" src="/images/events/{{$events->photo ? $events->photo->photo : ''}}" alt="{{str_limit($events->titleEn, 50)}}">
-     
+
                     @endif
+                    
+                    
+                    //like
+                    <a href="#" onclick="event.preventDefault(); 
+                     document.getElementById('agenda-fav-form')
+                             .submit();">Add to Favourites</a>
+ 
+                        <form id="agenda-fav-form" class="hidden" 
+                            action="{{ route('agenda.fav.store', $events) }}" method="POST">
+                            {{ csrf_field() }}
+                        </form>
+
+
+
                  </div>  
     {{--  //dutch   --}}
     @if(LaravelLocalization::getCurrentLocale()=='nl')
@@ -81,6 +95,8 @@
         @endforeach
     </div>
     @endif
+    
+    
 
     </article>  
     

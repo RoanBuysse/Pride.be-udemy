@@ -10,9 +10,7 @@
 |
 */
 
-View::share('news', App\News::all());
-        View::share('events', App\Events::all());
-        View::share('user', App\User::all());
+
 
 Route::group(
     [
@@ -43,6 +41,7 @@ Route::group(
         Route::get('/events/create', 'EventsController@create')->name('events');
         Route::post('/events/store', 'EventsController@store')->name('events');
         Route::get('/events/{id}', 'EventsController@show')->name('events');
+        Route::get('/events/{id}/like', 'EventsController@like')->name('events');
         Route::get('/events/{id}/edit', 'EventsController@edit')->name('events');
         Route::patch('/events/{id}/edit', 'EventsController@update')->name('events');
         Route::delete('/events/{id}', 'EventsController@destroy')->name('events');
@@ -56,6 +55,13 @@ Route::group(
 
         //users
         Route::resource('users', 'UserController' );
+
+        //likes
+        Route::post('/events/{id}/favourites', 'AgendaController@store')->name('agenda.fav.store');
+
+
+        
+
         
     });
     

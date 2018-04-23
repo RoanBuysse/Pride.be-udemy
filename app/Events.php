@@ -20,4 +20,15 @@ class Events extends Model
     {
         return $this->belongsTo(Photo::class);
     }
+    
+    public function favourites()
+{
+    return $this->morphToMany(User::class, 'favouriteables');
+}
+
+public function favouritedBy(User $user)
+{
+	return $this->favourites->contains($user);
+}
+    
 }

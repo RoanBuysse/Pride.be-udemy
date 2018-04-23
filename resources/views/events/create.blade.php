@@ -24,7 +24,7 @@
         <div class="form-group">
             {!! Form::label("time", "Time:") !!}
             {!! Form::time("time", null, ['class' => 'form-control']) !!}
-        </div>
+        </div> 
         
         {{--  <div class="form-group">
             {!! Form::label("organiser", "Organiser:") !!}

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Events;
 
+
 use App\EventsCategory;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use App\Photo;
@@ -185,4 +186,5 @@ class EventsController extends Controller
         return back();
     }
 
+   
 }

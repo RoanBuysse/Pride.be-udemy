@@ -32,4 +32,12 @@ class User extends Authenticatable
     {
     return $this->belongsTo(Role::class);
     }
+    
+    public function favouriteEvents()
+    {
+    return $this->belongsToMany(Events::class, 'favouriteables');
+               
+    }
+ 
+   
 }
