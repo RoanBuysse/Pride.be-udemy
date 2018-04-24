@@ -17,7 +17,7 @@ class CreateFavouriteablesTable extends Migration
             $table->increments('id');
             $table->integer('user_id');
             $table->integer('events_id');
-            $table->string('favouriteable_type')->nullable();; 
+            $table->string('favouriteable_type')->nullable(); 
             $table->timestamps();
     
            

@@ -65,7 +65,7 @@ public function index(Request $request)
     
         foreach ($getEvents as $getEvent)
         {
-            // var_dump($getEvent->titleNl);
+            // var_dump($getEvent->titleNl); 
             $newCollection->push($getEvent); 
         }
     }
