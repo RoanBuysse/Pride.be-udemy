@@ -1,24 +1,21 @@
 @extends('layouts.app')
 @section ('content')
       
-
+<div class="slidshow">
                 <div id="featured" class="carousel slide" data-ride="carousel">
                     <ol class="carousel-indicators">
                       
                       <?php
                       $i = 0;
                       ?>
-                      @foreach($news as $news )
-                      
+                      @foreach($events as $event ) 
                       @if($i==0)
                       <li data-target="#featured" data-slide-to="0" class="active"></li>
-
-
                       @else
                       <li data-target="#featured" data-slide-to="0"></li>
 
                       @endif
-                      
+                    
                       
                       <?php
                       $i++;
@@ -31,18 +28,30 @@
                         <?php
                         $i2 = 0;
                         ?>
-                    @foreach($news as $news ) 
+                    @foreach($events as $events ) 
                     @if($i2==0)
                       <div class="carousel-item active">
-                        <img class="d-block img-fluid" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/185649/background.png" alt="First slide">
-                        <div class="carousel-caption d-none d-block d-flex align-items-center" style="height: 100%">
+                          <img class="d-block img-fluid" size src="/images/events/{{$events->photo ? $events->photo->photo : ''}}" alt="First slide">
+                          <div class="carousel-caption d-none d-block d-flex align-items-center" style="height: 100%">
+          
                           <div>
-                            <img class="img-fluid laptop" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/185649/lcd.png" alt="laptop"/>
-                          </div>
-                          <div>
-                            <h3 class="product-caption-title">get the best version</h3>
-                            <p class="product-caption-details">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam alias porro vitae quos repudiandae repellat iure explicabo, omnis modi excepturi odio eos natus, quae quia.</p>
-                            <button class="product-caption-button">get it now</button>
+                            @if(LaravelLocalization::getCurrentLocale()=='nl')
+                            <h3 class="product-caption-title">{{$events->titleNl}}</h3>
+                            <p class="product-caption-details">{{$events->bodyNl}}</p>
+                             <a class="product-caption-button btn btn-warning mijnProg" href="{{action('EventsController@show', [$events->id])}}">{{$events->titleNl}}</a>
+                            @endif
+
+                            @if(LaravelLocalization::getCurrentLocale()=='fr')
+                            <h3 class="product-caption-title">{{$events->titleFr}}</h3>
+                            <p class="product-caption-details">{{$events->bodyFr}}</p>
+                            <a class="product-caption-button btn btn-warning mijnProg" href="{{action('EventsController@show', [$events->id])}}">{{$events->titleFr}}</a>
+                            @endif
+
+                            @if(LaravelLocalization::getCurrentLocale()=='en')
+                            <h3 class="product-caption-title">{{$events->titleEn}}</h3>
+                            <p class="product-caption-details">{{$events->bodyEn}}</p>
+                            <a class="product-caption-button btn btn-warning mijnProg" href="{{action('EventsController@show', [$events->id])}}">{{$events->titleEn}}</a>
+                            @endif
                           </div>
                         </div>
                       </div>
@@ -50,19 +59,30 @@
                       @else
 
                       <div class="carousel-item">
-                          <img class="d-block img-fluid" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/185649/background.png" alt="First slide">
+                          <img class="d-block img-fluid"  src="/images/events/{{$events->photo ? $events->photo->photo : ''}}" alt="First slide">
                           <div class="carousel-caption d-none d-block d-flex align-items-center" style="height: 100%">
-                            <div>
-                              <img class="img-fluid laptop" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/185649/lcd.png" alt="laptop"/>
-                            </div>
-                            <div>
-                              <h3 class="product-caption-title">get the best version</h3>
-                              <p class="product-caption-details">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam alias porro vitae quos repudiandae repellat iure explicabo, omnis modi excepturi odio eos natus, quae quia.</p>
-                              <button class="product-caption-button">get it now</button>
-                            </div>
-                          </div>
+          
+                              <div>
+                                  @if(LaravelLocalization::getCurrentLocale()=='nl')
+                                  <h3 class="product-caption-title">{{$events->titleNl}}</h3>
+                                  <p class="product-caption-details">{{$events->bodyNl}}</p>
+                                   <a class="product-caption-button btn btn-warning mijnProg" href="{{action('EventsController@show', [$events->id])}}">{{$events->titleNl}}</a>
+                                  @endif
+      
+                                  @if(LaravelLocalization::getCurrentLocale()=='fr')
+                                  <h3 class="product-caption-title">{{$events->titleFr}}</h3>
+                                  <p class="product-caption-details">{{$events->bodyFr}}</p>
+                                  <a class="product-caption-button btn btn-warning mijnProg" href="{{action('EventsController@show', [$events->id])}}">{{$events->titleFr}}</a>
+                                  @endif
+      
+                                  @if(LaravelLocalization::getCurrentLocale()=='en')
+                                  <h3 class="product-caption-title">{{$events->titleEn}}</h3>
+                                  <p class="product-caption-details">{{$events->bodyEn}}</p>
+                                  <a class="product-caption-button btn btn-warning mijnProg" href="{{action('EventsController@show', [$events->id])}}">{{$events->titleEn}}</a>
+                                  @endif
+                                </div>
                         </div>
-
+                      </div>
                       @endif
 
                        
@@ -82,8 +102,13 @@
                           <span class="sr-only">Next</span>
                         </a>
                       </div>
+                    </div>
+                    
+                  
+                
+            
 
-         
+</div>
                       
                       
                       <div class="container-fluid parallax">
