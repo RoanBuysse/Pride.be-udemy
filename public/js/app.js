@@ -14000,8 +14000,8 @@ window.Vue = __webpack_require__(37);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example-component', __webpack_require__(40));
-Vue.component('index-component', __webpack_require__(43));
+Vue.component('News', __webpack_require__(40));
+Vue.component('index-component', __webpack_require__(60));
 Vue.component('edit', __webpack_require__(46));
 Vue.component('create', __webpack_require__(49));
 Vue.component('show', __webpack_require__(52));
@@ -47403,123 +47403,9 @@ if (false) {
 }
 
 /***/ }),
-/* 43 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(2)
-/* script */
-var __vue_script__ = __webpack_require__(44)
-/* template */
-var __vue_template__ = __webpack_require__(45)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources\\assets\\js\\components\\News\\index-component.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-60fd53a0", Component.options)
-  } else {
-    hotAPI.reload("data-v-60fd53a0", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 44 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    data: function data() {
-        var _ref;
-
-        return _ref = {
-            news: []
-        }, _defineProperty(_ref, 'news', {
-            id: '',
-            titleNl: '',
-            titleEn: '',
-            titleFr: '',
-            bodyNl: '',
-            bodyFr: '',
-            bodyEn: '',
-            photo_id: ''
-        }), _defineProperty(_ref, 'news_id', ''), _defineProperty(_ref, 'paginaton', {}), _defineProperty(_ref, 'edit', false), _ref;
-    },
-    created: function created() {
-        this.fetchNews();
-    },
-
-
-    methods: {
-        fetchNews: function fetchNews() {
-            fetch('api/news').then(function (res) {
-                return res.json();
-            }).then(function (res) {
-                console.log(res);
-            });
-        }
-    }
-
-});
-
-/***/ }),
-/* 45 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("article")
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-60fd53a0", module.exports)
-  }
-}
-
-/***/ }),
+/* 43 */,
+/* 44 */,
+/* 45 */,
 /* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -47881,6 +47767,144 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 56 */,
+/* 57 */,
+/* 58 */,
+/* 59 */,
+/* 60 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(61)
+/* template */
+var __vue_template__ = __webpack_require__(62)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\News\\News.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-8aac4216", Component.options)
+  } else {
+    hotAPI.reload("data-v-8aac4216", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 61 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        var _ref;
+
+        return _ref = {
+            news: []
+        }, _defineProperty(_ref, 'news', {
+            id: '',
+            title: '',
+            body: '',
+            // titleNl:'',
+            // titleEn:'',
+            // titleFr:'',
+            // bodyNl:'',
+            // bodyFr:'',
+            // bodyEn:'',
+            photo_id: ''
+        }), _defineProperty(_ref, 'news_id', ''), _defineProperty(_ref, 'paginaton', {}), _defineProperty(_ref, 'edit', false), _ref;
+    },
+    created: function created() {
+        this.fetchNews();
+    },
+
+
+    methods: {
+        fetchNews: function fetchNews() {
+            var _this = this;
+
+            fetch('api/news').then(function (res) {
+                return res.json();
+            }).then(function (res) {
+                _this.news = res.data;
+                console.log(_this.news);
+            });
+        }
+    }
+
+});
+
+/***/ }),
+/* 62 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "article",
+    _vm._l(_vm.news, function(news) {
+      return _c("div", { key: news.id, staticClass: "card card-body" }, [
+        _c("h3", [_vm._v(_vm._s(news.title))]),
+        _vm._v(" "),
+        _c("p", [_vm._v(_vm._s(news.body))])
+      ])
+    })
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-8aac4216", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

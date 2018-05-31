@@ -1,7 +1,10 @@
 <template>
    <article>
-                    <!-- <div class="card-header"><p>{{news.id}}lol</p></div> -->
-                    <!-- <h2><a href="{{action('NewsController@show', [news.id])}}">{{news.titleNl}}</a></h2> -->
+                   <div class="card card-body" v-for="news in news" v-bind:key="news.id">
+                   <h3>{{news.title}}</h3>
+                   <p>{{news.body}}</p>
+                   </div>
+
    </article>
 </template>
 
@@ -12,21 +15,21 @@
             news: [],
             news: {
                 id: '',
-                titleNl:'',
-                titleEn:'',
-                titleFr:'',
-                bodyNl:'',
-                bodyFr:'',
-                bodyEn:'',
+                title:'',
+                body:'',
+                // titleNl:'',
+                // titleEn:'',
+                // titleFr:'',
+                // bodyNl:'',
+                // bodyFr:'',
+                // bodyEn:'',
                 photo_id:''
             },
             news_id:'',
             paginaton: {},
             edit: false
-
-           }
+            };
        },
-      
       created() {
           this.fetchNews();
       },
@@ -36,8 +39,9 @@
               fetch('api/news')
               .then(res => res.json())
               .then(res => {
-                  console.log(res);
-            })
+               this.news = res.data;
+               console.log(this.news);
+            });
           }
       }
       
