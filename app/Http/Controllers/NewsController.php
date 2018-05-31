@@ -15,8 +15,8 @@ class NewsController extends Controller
     }
     public function index()
     {
-        $news = News::latest()->get();
-        return view('news.index' , compact('news'));
+        $news = News::orderBy('created_at', 'desc')->paginate(10);
+        return NewsResource::collection($articles);
         // dd($newstranslation);
     }
     public function create()

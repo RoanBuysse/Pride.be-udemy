@@ -2,7 +2,9 @@
 {{--  ok  --}}
 @extends('layouts.app')
 @section ('content')
-<index></index>
+
+
+
 <main class="container">
 
    <div class="container-fluid">
@@ -14,9 +16,17 @@
     <div class="col-sm-8 col-sm-offset-2">
     
     @include('partials.flashMessage')
-  
+      
+    <article>
+        <index-component 
+        :news='{!!json_encode($news)!!}'
+        >
+        </index-component>
+    </article>
 
 
+
+    {{-- 
         
     @foreach($news as $news )
     @if(LaravelLocalization::getCurrentLocale()=='nl')
@@ -35,7 +45,7 @@
     @endif 
             
            
-    @endforeach
+    @endforeach --}}
     
     </div>
 </div>

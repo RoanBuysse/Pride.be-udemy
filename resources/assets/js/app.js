@@ -16,7 +16,7 @@ window.Vue = require('vue');
  */
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
-Vue.component('index', require('./components/News/index.vue'));
+Vue.component('index-component', require('./components/News/index-component.vue'));
 Vue.component('edit', require('./components/News/edit.vue'));
 Vue.component('create', require('./components/News/create.vue'));
 Vue.component('show', require('./components/News/show.vue'));
