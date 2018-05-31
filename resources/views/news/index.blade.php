@@ -2,7 +2,7 @@
 {{--  ok  --}}
 @extends('layouts.app')
 @section ('content')
-
+<index></index>
 <main class="container">
 
    <div class="container-fluid">
