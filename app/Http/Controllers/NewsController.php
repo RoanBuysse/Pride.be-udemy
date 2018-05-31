@@ -5,6 +5,7 @@ use App\News;
 use App\NewsCategory;
 use App\Photo;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use App\Http\Resources\News as NewsResource;
 use Carbon\Carbon;
 use Session;
 class NewsController extends Controller
@@ -13,10 +14,13 @@ class NewsController extends Controller
     {
       $this->middleware('isWriter',['only' => ['create','edit']]);
     }
-    public function index()
+    public function index(Request $request)
     {
         $news = News::orderBy('created_at', 'desc')->paginate(10);
-        return NewsResource::collection($articles);
+        
+        
+        return NewsResource::collection($news);
+   
         // dd($newstranslation);
     }
     public function create()
