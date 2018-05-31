@@ -13973,7 +13973,7 @@ module.exports = __webpack_require__(59);
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Home_Slide__ = __webpack_require__(43);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_News_News_Index__ = __webpack_require__(43);
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -13983,6 +13983,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 __webpack_require__(19);
 
+//react routes
 
 
 $('#recipeCarousel').carousel({
@@ -36198,39 +36199,78 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 
-var Slide = function (_Component) {
-    _inherits(Slide, _Component);
+var News_Index = function (_Component) {
+    _inherits(News_Index, _Component);
 
-    function Slide() {
-        _classCallCheck(this, Slide);
+    function News_Index() {
+        _classCallCheck(this, News_Index);
 
-        return _possibleConstructorReturn(this, (Slide.__proto__ || Object.getPrototypeOf(Slide)).apply(this, arguments));
+        return _possibleConstructorReturn(this, (News_Index.__proto__ || Object.getPrototypeOf(News_Index)).apply(this, arguments));
     }
 
-    _createClass(Slide, [{
+    _createClass(News_Index, [{
+        key: 'renderNews',
+        value: function renderNews() {
+            if (lang == 'nl') {
+                return news.map(function (news) {
+                    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'article',
+                        { 'class': 'module' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'div',
+                            { 'class': 'inside-module' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'div',
+                                { 'class': 'bar-full' },
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('span', { 'class': 'bar' }),
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'div',
+                                    { 'class': 'bar-box' },
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'span',
+                                        { 'class': 'bar-flip' },
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            'a',
+                                            { href: '{{action(\'newsController@show\', [news->id])}}' },
+                                            news.titleNl
+                                        )
+                                    )
+                                )
+                            ),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'div',
+                                { 'class': 'pad' },
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'p',
+                                    null,
+                                    news.bodyNl
+                                )
+                            )
+                        )
+                    );
+                });
+            }
+        }
+    }, {
         key: 'render',
         value: function render() {
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'div',
-                { className: 'row' },
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    'button',
-                    { type: 'button', className: 'btn purple-bg btn-lg btn-block' },
-                    'Read more news'
-                )
+                null,
+                this.renderNews()
             );
         }
     }]);
 
-    return Slide;
+    return News_Index;
 }(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
 
-/* unused harmony default export */ var _unused_webpack_default_export = (Slide);
+/* unused harmony default export */ var _unused_webpack_default_export = (News_Index);
 
 // We only want to try to render our component on pages that have a div with an ID
 // of "example"; otherwise, we will see an error in our console 
-if (document.getElementById('Slide')) {
-    __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(Slide, null), document.getElementById('Slide'));
+if (document.getElementById('news_index')) {
+    __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(News_Index, null), document.getElementById('news_index'));
 }
 
 /***/ }),

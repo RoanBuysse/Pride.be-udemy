@@ -21,6 +21,10 @@
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script> -->
     <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.0/css/mdb.min.css" rel="stylesheet"> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script type="text/javascript">
+        var lang = "{{ LaravelLocalization::getCurrentLocale() }}";
+        console.log(lang);
+    </script>
 </head>
 <body>
     
@@ -90,7 +94,7 @@
                                         {{ $properties['native'] }}
                                     </a>
                                 @endforeach
-
+                                
                             </div>
                         </div>
                            

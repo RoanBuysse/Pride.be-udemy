@@ -7,7 +7,9 @@
 
 require('./bootstrap');
 
-import Example from './components/Home/Slide';
+//react routes
+import News from './components/News/News_Index';
+
 
 
 $('#recipeCarousel').carousel({

@@ -1,11 +1,152 @@
+body {
+    background: url("/images/background.png");
+    background-repeat: repeat;
+    background-size:100vmax;
+
+    opacity: 0.8;
+}
 
 
-// Fonts
-@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
+.parallax {
+    /* The image used */
+    background-image: url("/images/QueerPride.jpg");
 
-// Variables
-@import "variables";
+    /* Set a specific height */
+    min-height: 300px; 
 
-// Bootstrap
-@import '~bootstrap/scss/bootstrap';
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.mijnProg {
+    border-radius: 0;
+    /* margin-top: 5px !important; */
+}
+
+.account-box
+{
+    margin-top: 10vh;
+    border-radius: 2px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    -khtml-border-radius: 2px;
+    -o-border-radius: 2px;
+    z-index: 3;
+    font-size: 13px !important;
+    font-family: "Helvetica Neue" ,Helvetica,Arial,sans-serif;
+    background-color: #ffffff;
+    padding: 20px;
+}
+
+.logoLogin
+{
+    width: 65px;
+    text-align: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.forgotLnk
+{
+    margin-top: 10px;
+    display: block;
+}
+
+.purple-bg
+{
+    background-color: #CC0099;
+    color: #fff;
+}
+.or-box
+{
+    position: relative;
+    border-top: 1px solid #dfdfdf;
+    padding-top: 20px;
+    margin-top:20px;
+}
+.or
+{
+    color: #666666;
+    background-color: #ffffff;
+    position: absolute;
+    text-align: center;
+    top: -8px;
+    width: 40px;
+    left: 90px;
+}
+.account-box .btn:hover
+{
+    color: #fff;
+}
+
+.blue-bg {
+    background-color: #0000FF;
+    color: #fff;
+}
+
+/*  */
+
+/*  */
+
+/*Now the styles*/
+* {
+    margin: 0; 
+	padding: 0;
+}
+/* body {
+	background: #ccc; 
+	font-family: arial, verdana, tahoma;
+} */
+
+/*Time to apply widths for accordian to work
+Width of image = 640px
+total images = 5
+so width of hovered image = 640px
+width of un-hovered image = 40px - you can set this to anything
+so total container width = 640 + 40*4 = 800px;
+default width = 800/5 = 160px;
+*/
+.hidden{display:none;}
+
+/*Image title styles*/
+.image_title {
+	background: rgba(0, 0, 0, 0.5);
+	position: absolute;
+	left: 0; 	
+    width: 640px;	
+
+}
+.image_title a {
+	display: block;
+	color: #fff;
+	text-decoration: none;
+	padding: 20px;
+	font-size: 16px;
+}
+
+
+
+
+.sponsorsPride {
+    padding-top: 30px;
+}
+
+section {
+    padding-bottom: 20px;
+}
+
+
+
+
+h3 {
+  margin-top: 12px;
+  font-size: 1.2rem;
+}
 
