@@ -18,10 +18,7 @@
     @include('partials.flashMessage')
       
     <article>
-        <index-component 
-        :news='{!!json_encode($news)!!}'
-        >
-        </index-component>
+        <index-component></index-component>
     </article>
 
 
