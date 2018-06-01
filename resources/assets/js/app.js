@@ -22,29 +22,9 @@ Vue.component('create', require('./components/News/create.vue'));
 Vue.component('show', require('./components/News/show.vue'));
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+   
 });
 
 
 
-
-$('#recipeCarousel').carousel({
-    interval: 10000
-  })
-  
-  $('.carousel .carousel-item').each(function(){
-      var next = $(this).next();
-      if (!next.length) {
-      next = $(this).siblings(':first');
-      }
-      next.children(':first-child').clone().appendTo($(this));
-      
-      for (var i=0;i<2;i++) {
-          next=next.next();
-          if (!next.length) {
-              next = $(this).siblings(':first');
-            }
-          
-          next.children(':first-child').clone().appendTo($(this));
-        }
-  });

@@ -12,7 +12,7 @@
 
         </div>
 
-        <!-- <nav aria-label="Page navigation example">
+        <nav aria-label="Page navigation example">
             <ul class="pagination">
                 <li v-bind:class="[{disabled: !pagination.prev_page_url}]" class="page-item">
                     <a class="page-link" href="#" @click="fetchNews(pagination.prev_page_url)">Previous</a>
@@ -26,7 +26,7 @@
                     <a class="page-link" href="#" @click="fetchNews(pagination.next_page_url)">Next</a>
                 </li>
             </ul>
-        </nav> -->
+        </nav>
 
     </article>
 </template>
@@ -50,7 +50,7 @@
                 },
                 news_id: '',
                 photo_id: '',
-                // paginaton: {},
+                pagination: {},
                 edit: false
             };
 
@@ -71,7 +71,7 @@
                     .then(res => res.json())
                     .then(res => {
                         this.news = res.data;
-                        // vm.makePagination(res.meta, res.links);
+                        vm.makePagination(res.meta, res.links);
 
                         // console.log(res.links);
                     })
@@ -79,18 +79,18 @@
                     .catch(err => console.log(err));
             },
 
-            // makePagination(meta, links) {
-            //     let pagination = {
-            //         current_page: meta.current_page,
-            //         last_page: meta.last_page,
-            //         next_page_url: links.next,
-            //         prev_page_url: links.prev
-            //     };
+            makePagination(meta, links) {
+                let pagination = {
+                    current_page: meta.current_page,
+                    last_page: meta.last_page,
+                    next_page_url: links.next,
+                    prev_page_url: links.prev
+                };
 
-            // this.paginaton = pagination;
-            //   console.log(pagination.next_page_url);
+            this.pagination = pagination;
+              console.log(pagination);
 
-            // },
+            },
 
             fetchPhotos() {
                 fetch('api/photo')
@@ -102,7 +102,7 @@
 
                     })
 
-            },
+            }
 
 
 
