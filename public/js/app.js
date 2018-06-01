@@ -47470,6 +47470,26 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -47482,17 +47502,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             id: '',
             title: '',
             body: '',
-            // titleNl:'',
-            // titleEn:'',
-            // titleFr:'',
-            // bodyNl:'',
-            // bodyFr:'',
-            // bodyEn:'',
             photo_id: ''
         }), _defineProperty(_ref, 'photo', {
             id: '',
             photo: ''
-        }), _defineProperty(_ref, 'news_id', ''), _defineProperty(_ref, 'photo_id', ''), _defineProperty(_ref, 'paginaton', {}), _defineProperty(_ref, 'edit', false), _ref;
+        }), _defineProperty(_ref, 'news_id', ''), _defineProperty(_ref, 'paginaton', {}), _defineProperty(_ref, 'photo_id', ''), _defineProperty(_ref, 'edit', false), _ref;
     },
     created: function created() {
         this.fetchNews();
@@ -47503,16 +47517,32 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
     methods: {
-        fetchNews: function fetchNews() {
+        fetchNews: function fetchNews(page_url) {
             var _this = this;
 
-            fetch('api/news').then(function (res) {
+            var vm = this;
+            page_url = page_url || 'api/news';
+            fetch(page_url).then(function (res) {
                 return res.json();
             }).then(function (res) {
                 _this.news = res.data;
+                vm.pagination(res.meta, res.links);
 
-                //    console.log(this.news);
+                // console.log(res.links);
+            }).catch(function (err) {
+                return console.log(err);
             });
+        },
+        pagination: function pagination(meta, links) {
+            var pagination = {
+                current_page: meta.current_page,
+                last_page: meta.last_page,
+                next_page_url: links.next,
+                prev_page_url: links.prev
+            };
+
+            this.paginaton = pagination;
+            console.log(pagination.next_page_url);
         },
         fetchPhotos: function fetchPhotos() {
             var _this2 = this;
@@ -47522,14 +47552,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             }).then(function (res) {
                 _this2.photo = res.data;
             });
-            this.editNews();
-            //  console.log(photo);
-        },
-        editNews: function editNews(news, photo) {
-            //   this.news=Vue.set(this.news, 2, {photo_id: '456', body: 'file2-b'});
-            //  this.news=Vue.set(this.news, this.news.findIndex(f => f.token === '1'), {token: '456', name: 'file2-b'})
-            //   console.log(this.photo);
-            // Route::get('/api/questions', function() { return Questions::with('User')->get(); } );
         }
     }
 
@@ -47545,24 +47567,100 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "article",
-    _vm._l(_vm.news, function(news) {
-      return _c(
-        "div",
-        { key: news.id, staticClass: "card card-body" },
-        [
-          _c("h3", [_vm._v(_vm._s(news.title))]),
+    [
+      _vm._l(_vm.news, function(news) {
+        return _c(
+          "div",
+          { key: news.id, staticClass: "card card-body" },
+          [
+            _c("h3", [_vm._v(_vm._s(news.title))]),
+            _vm._v(" "),
+            _vm._l(_vm.photo, function(photo) {
+              return news.photo_id === photo.id
+                ? _c("div", { key: photo.id }, [
+                    _c("img", {
+                      staticClass: "featured_image img-responsive",
+                      attrs: {
+                        src: "/images/news/" + photo.photo,
+                        alt: "Title of firsqgrrgqqrgt new item"
+                      }
+                    })
+                  ])
+                : _vm._e()
+            }),
+            _vm._v(" "),
+            _c("p", [_vm._v(_vm._s(news.body))])
+          ],
+          2
+        )
+      }),
+      _vm._v(" "),
+      _c("nav", { attrs: { "aria-label": "Page navigation example" } }, [
+        _c("ul", { staticClass: "pagination" }, [
+          _c(
+            "li",
+            {
+              staticClass: "page-item",
+              class: [{ disabled: !_vm.pagination.prev_page_url }]
+            },
+            [
+              _c(
+                "a",
+                {
+                  staticClass: "page-link",
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      _vm.fetchNews(_vm.pagination.prev_page_url)
+                    }
+                  }
+                },
+                [_vm._v("Previous")]
+              )
+            ]
+          ),
           _vm._v(" "),
-          _vm._l(_vm.photo, function(photo) {
-            return news.photo_id === photo.id
-              ? _c("p", { key: photo }, [_vm._v(_vm._s(photo.photo))])
-              : _vm._e()
-          }),
+          _c("li", { staticClass: "page-item disabled" }, [
+            _c(
+              "a",
+              { staticClass: "page-link text-dark", attrs: { href: "#" } },
+              [
+                _vm._v(
+                  "Page " +
+                    _vm._s(_vm.pagination.current_page) +
+                    " of " +
+                    _vm._s(_vm.pagination.last_page)
+                )
+              ]
+            )
+          ]),
           _vm._v(" "),
-          _c("p", [_vm._v(_vm._s(news.body))])
-        ],
-        2
-      )
-    })
+          _c(
+            "li",
+            {
+              staticClass: "page-item",
+              class: [{ disabled: !_vm.pagination.next_page_url }]
+            },
+            [
+              _c(
+                "a",
+                {
+                  staticClass: "page-link",
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      _vm.fetchNews(_vm.pagination.next_page_url)
+                    }
+                  }
+                },
+                [_vm._v("Next")]
+              )
+            ]
+          )
+        ])
+      ])
+    ],
+    2
   )
 }
 var staticRenderFns = []
