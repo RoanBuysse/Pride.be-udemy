@@ -8,44 +8,22 @@
 <main class="container">
 
    <div class="container-fluid">
-       <div class="jumbotron">
-       <h1>News items</h1>
-    
-    </div>
-
-    <div class="col-sm-8 col-sm-offset-2">
-    
-    @include('partials.flashMessage')
+        <div class="jumbotron">
+        <h1>News items</h1>
       
-    <article>
-        <index-component></index-component>
-    </article>
+        </div>
 
-
-
-    {{-- 
+        <div class="col-sm col-sm-offset-2">
         
-    @foreach($news as $news )
-    @if(LaravelLocalization::getCurrentLocale()=='nl')
-    <h2><a href="{{action('NewsController@show', [$news->id])}}">{{$news->titleNl}}</a></h2>
-    <p>{{$news->bodyNl}}</p>
-    @endif 
-
-    @if(LaravelLocalization::getCurrentLocale()=='fr')
-    <h2><a href="{{action('NewsController@show', [$news->id])}}">{{$news->titleFr}}</a></h2>
-    <p>{{$news->bodyFr}}</p>
-    @endif 
-
-    @if(LaravelLocalization::getCurrentLocale()=='en')
-    <h2><a href="{{action('NewsController@show', [$news->id])}}">{{$news->titleEn}}</a></h2>
-    <p>{{$news->bodyEn}}</p>
-    @endif 
+          @include('partials.flashMessage')
             
-           
-    @endforeach --}}
-    
-    </div>
-</div>
+          
+              <News></News>
+          
+
+        
+        </div>
+  </div>
 
 </main>
 @endsection 

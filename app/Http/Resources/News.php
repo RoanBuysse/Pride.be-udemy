@@ -21,7 +21,8 @@ class News extends JsonResource
         'id' => $this->id,
         'title' => $this->titleNl,
         'body' => $this->bodyNl,
-        'photo_id' => $this->photo_id
+        'photo_id' => $this->photo_id,
+        'created' => $this->created_at
         ];
         }
 
@@ -31,7 +32,8 @@ class News extends JsonResource
         'id' => $this->id,
         'title' => $this->titleEn,
         'body' => $this->bodyEn,
-        'photo_id' => $this->photo_id
+        'photo_id' => $this->photo_id,
+        'created' => $this->created_at
         ];
         }
 
@@ -41,7 +43,8 @@ class News extends JsonResource
         'id' => $this->id,
         'title' => $this->titleFr,
         'body' => $this->bodyFr,
-        'photo_id' => $this->photo_id
+        'photo_id' => $this->photo_id,
+        'created' => $this->created_at
         ];
         }
         // return [

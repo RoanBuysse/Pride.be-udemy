@@ -1,19 +1,31 @@
 <template>
     <article>
-        <div class="card card-body" v-for="news in news" v-bind:key="news.id">
-            <h3>{{news.title}}</h3>
-            <div v-for="photo in photo" v-bind:key="photo.id" v-if="news.photo_id === photo.id">
+      
+        
+        <div class="row">
+           
+                <div v-for="news in news" v-bind:key="news.id" class="col-sm">
+                  
+                        <div class="card mb-4" style="width: 18rem; max-height: 600px;">
+                            <div v-for="photo in photo" v-bind:key="photo.id" v-if="news.photo_id === photo.id">
+                                <img class="card-img-top" v-bind:src="'/images/news/' + photo.photo" alt="news photo"/>
+                            </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">{{news.title}}</h5>
+                                    <p class="card-text" style="min-height: 50px;">{{news.body | shorten}}</p>
+                                    <a class="btn btn-primary" v-bind:href=" link + '/' + news.id">More</a>
+                                        
+                                </div>
 
-                <img v-bind:src="'/images/news/' + photo.photo" alt="Title of firsqgrrgqqrgt new item" class="featured_image img-responsive"
-                />
-            </div>
-
-            <p>{{news.body}}</p>
-
+                            <!-- <div class="card-footer text-muted">{{news.created.date}}</div> -->
+                    
+                        </div>
+                    </div>   
+            
         </div>
 
         <nav aria-label="Page navigation example">
-            <ul class="pagination">
+            <ul class="pagination justify-content-center">
                 <li v-bind:class="[{disabled: !pagination.prev_page_url}]" class="page-item">
                     <a class="page-link" href="#" @click="fetchNews(pagination.prev_page_url)">Previous</a>
                 </li>
@@ -41,7 +53,8 @@
                     id: '',
                     title: '',
                     body: '',
-                    photo_id: ''
+                    photo_id: '',
+                    created: ''
                 },
 
                 photo: {
@@ -51,6 +64,7 @@
                 news_id: '',
                 photo_id: '',
                 pagination: {},
+                link: window.location.href,
                 edit: false
             };
 
@@ -59,6 +73,7 @@
             this.fetchNews();
             this.fetchPhotos();
             //   this.idtoLink();
+            
 
 
         },
@@ -72,10 +87,10 @@
                     .then(res => {
                         this.news = res.data;
                         vm.makePagination(res.meta, res.links);
-
-                        // console.log(res.links);
+                        // this.news.body = res.data.body.substring(0,100);
+                        // console.log(res.data.body);
                     })
-
+                    
                     .catch(err => console.log(err));
             },
 
@@ -88,7 +103,7 @@
                 };
 
             this.pagination = pagination;
-              console.log(pagination);
+            //   console.log(pagination);
 
             },
 
@@ -102,11 +117,25 @@
 
                     })
 
+            },
+            
+
+
+
+
+        
+        },
+
+        filters: {
+        shorten: function (value) {
+            if (!value) return ''
+            value = value.toString()
+            if(value.length > 200)
+            {
+                 return value.substring(0,200)+'...'
             }
-
-
-
-
+           else{return value}
+            }
         }
 
 

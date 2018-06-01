@@ -20,7 +20,10 @@ class isAdmin
             if($user->role->name == 'Admin'){
                return $next($request); 
             }
-            return redirect('/');
+            else{
+                return redirect('/');
+            }
+            
 
     }
 }
