@@ -65662,7 +65662,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
         return _ref = {
             news: [],
-            photo: []
+            photo: [],
+            NewsToUpdate: []
         }, _defineProperty(_ref, 'news', {
             id: '',
             title: '',
@@ -65693,7 +65694,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             fetch(page_url).then(function (res) {
                 return res.json();
             }).then(function (res) {
+
                 _this.news = res.data;
+                _this.$options.newsLenght = res.data.length;
+                console.log("ok");
+
                 vm.makePagination(res.meta, res.links);
                 // this.news.body = res.data.body.substring(0,100);
                 // console.log(res.data.body);
@@ -65720,35 +65725,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             }).then(function (res) {
                 _this2.photo = res.data;
             });
-        },
-
-
-        // transition
-        beforeEnter: function beforeEnter(el) {
-            el.style.opacity = 0;
-            el.style.left = '50%';
-
-            if (!this.animating) {
-                this.animating = true;
-            }
-        },
-        enter: function enter(el, done) {
-            var delay = (el.dataset.index > 9 ? 9 : el.dataset.index) * 100;
-
-            TweenLite.to(el, 0.5, {
-                opacity: 1,
-                left: 0,
-                oncomplete: done
-            });
-        },
-        afterEnter: function afterEnter(el) {
-            if (el.dataset.index == this.$options.newsLenght - 1) {
-                this.animating.false;
-            }
-        },
-        beforeLeave: function beforeLeave(el) {},
-        leave: function leave(el, done) {},
-        afterLeave: function afterLeave(el) {}
+        }
     },
 
     filters: {
@@ -65767,6 +65744,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             value = value.toString();
             return moment(String(value)).format('DD/MM/YYYY');
         }
+    },
+
+    watch: {
+        animating: function animating(val) {
+            if (!val && this.NewsToUpdate.length > 0) {
+                this.news = this.NewsToUpdate;
+                this.$options.newsLenght = this.news.length;
+                this.NewsToUpdate = [];
+            }
+        }
     }
 
 });
@@ -65783,70 +65770,61 @@ var render = function() {
     _c(
       "div",
       { staticClass: "row" },
-      [
-        _c(
-          "transition-group",
-          {
-            on: {
-              "before-enter": _vm.beforeEnter,
-              enter: _vm.enter,
-              "after-enter": _vm.afterEnter,
-              "before-leave": _vm.beforeLeave,
-              leave: _vm.leave,
-              "after-leave": _vm.afterLeave
-            }
-          },
-          _vm._l(_vm.news, function(news) {
-            return _c("div", { key: news.id, staticClass: "col-sm" }, [
-              _c(
-                "div",
-                { staticClass: "card mb-4", staticStyle: { width: "18rem" } },
-                [
-                  _vm._l(_vm.photo, function(photo) {
-                    return news.photo_id === photo.id
-                      ? _c("div", { key: photo.id }, [
-                          _c("img", {
-                            staticClass: "card-img-top",
-                            attrs: {
-                              src: "/images/news/" + photo.photo,
-                              alt: "news photo"
-                            }
-                          })
-                        ])
-                      : _vm._e()
-                  }),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "card-body" }, [
-                    _c("h5", { staticClass: "card-title" }, [
-                      _vm._v(_vm._s(news.title))
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "p",
-                      {
-                        staticClass: "card-text",
-                        staticStyle: { "min-height": "50px" }
-                      },
-                      [_vm._v(_vm._s(_vm._f("shorten")(news.body)))]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "a",
-                      {
-                        staticClass: "btn btn pridePurple",
-                        attrs: { href: _vm.link + "/" + news.id }
-                      },
-                      [_vm._v(_vm._s(_vm.$t("message.More")))]
-                    )
-                  ])
-                ],
-                2
-              )
-            ])
-          })
-        )
-      ],
-      1
+      _vm._l(_vm.news, function(news) {
+        return _c("div", { key: news.id, staticClass: "col-sm" }, [
+          _c(
+            "div",
+            {
+              staticClass: "card mb-4 scene_element scene_element--fadeinup",
+              staticStyle: { width: "18rem" }
+            },
+            [
+              _vm._l(_vm.photo, function(photo) {
+                return news.photo_id === photo.id
+                  ? _c("div", { key: photo.id }, [
+                      _c("img", {
+                        staticClass: "card-img-top",
+                        attrs: {
+                          src: "/images/news/" + photo.photo,
+                          alt: "news photo"
+                        }
+                      })
+                    ])
+                  : _vm._e()
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-body" }, [
+                _c("h5", { staticClass: "card-title" }, [
+                  _vm._v(_vm._s(news.title))
+                ]),
+                _vm._v(" "),
+                _c(
+                  "p",
+                  {
+                    staticClass: "card-text",
+                    staticStyle: { "min-height": "50px" }
+                  },
+                  [_vm._v(_vm._s(_vm._f("shorten")(news.body)))]
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "btn btn pridePurple",
+                    attrs: { href: _vm.link + "/" + news.id }
+                  },
+                  [_vm._v(_vm._s(_vm.$t("message.More")))]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-footer text-muted" }, [
+                _vm._v(_vm._s(_vm._f("formatDate")(news.created.date)))
+              ])
+            ],
+            2
+          )
+        ])
+      })
     ),
     _vm._v(" "),
     _c("nav", { attrs: { "aria-label": "Page navigation example" } }, [

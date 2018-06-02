@@ -2,9 +2,9 @@
     <article>
       
        
-            <div class="row">
+        <div class="row">
 
-                     <transition-group
+                     <!-- <transition-group  class="row"
                         @before-enter='beforeEnter'
                         @enter='enter'
                         @after-enter='afterEnter'
@@ -12,11 +12,11 @@
                         @leave='leave'
                         @after-leave='afterLeave'
                         
-                        >
+                        > -->
             
                     <div v-for="news in news" v-bind:key="news.id" class="col-sm">
                     
-                            <div class="card mb-4" style="width: 18rem;">
+                            <div class="card mb-4 scene_element scene_element--fadeinup" style="width: 18rem;">
                                 <div v-for="photo in photo" v-bind:key="photo.id" v-if="news.photo_id === photo.id">
                                     <img class="card-img-top" v-bind:src="'/images/news/' + photo.photo" alt="news photo"/>
                                 </div>
@@ -28,13 +28,13 @@
                                             
                                     </div>
 
-                                <!-- <div class="card-footer text-muted">{{news.created.date | formatDate}}</div> -->
+                                <div class="card-footer text-muted">{{news.created.date | formatDate}}</div>
                         
                             </div>
                         </div>   
-                    </transition-group>
-            </div>
-    
+                    <!-- </transition-group>
+         -->
+    </div>
 
 
         
@@ -63,6 +63,7 @@
             return {
                 news: [],
                 photo: [],
+                NewsToUpdate: [],
                 news: {
                     id: '',
                     title: '',
@@ -101,7 +102,12 @@
                 fetch(page_url)
                     .then(res => res.json())
                     .then(res => {
-                        this.news = res.data;
+                    
+                            this.news = res.data;
+                            this.$options.newsLenght = res.data.length
+                            console.log("ok");
+                        
+                        
                         vm.makePagination(res.meta, res.links);
                         // this.news.body = res.data.body.substring(0,100);
                         // console.log(res.data.body);
@@ -136,33 +142,47 @@
             },
 
             // transition
-            beforeEnter(el){
-                el.style.opacity = 0
-                el.style.left = '50%'
+            // beforeEnter(el){
+            //     el.style.opacity = 0
 
-                if(!this.animating){
-                    this.animating = true
-                }
-            },
-            enter(el, done){
-                const delay = (el.dataset.index > 9 ? 9 : el.dataset.index)*100
+            //     if(!this.animating){
+            //         this.animating = true
+            //     }
+            // },
+            // enter(el, done){
+            //     const delay = (el.dataset.index > 9 ? 9 : el.dataset.index)*100
 
-                TweenLite.to(el, 0.5,{
-                    opacity: 1,
-                    left: 0,
-                    oncomplete: done
-                })
-            },
+            //     TweenLite.to(el, 0.5,{
+            //         opacity: 1,
+            //         oncomplete: done,
+            //     })
+            // },
             
-            afterEnter(el){
-                if(el.dataset.index == this.$options.newsLenght - 1) {
-                    this.animating.false
-                }
-            },
+            // afterEnter(el){
+            //     if(el.dataset.index == this.$options.newsLenght - 1) {
+            //         this.animating.false
+            //     }
+            // },
 
-            beforeLeave(el){},
-            leave(el, done){},
-            afterLeave(el){},
+            // beforeLeave(el){
+            //      if(!this.animating){
+            //         this.animating = true
+            //     }
+            // },
+            // leave(el, done){
+            //  const delay = el.dataset.index*50
+            //     setTimeout(() => {
+            //     TweenLite.to(el, 0.5,{
+            //         opacity: 0,
+            //         oncomplete: done
+            //     })
+            //     },delay)
+            // },
+            // afterLeave(el){
+            //      if(el.dataset.index == this.$options.newsLenght - 1) {
+            //         this.animating.false
+            //     }
+            // },
         
 
             
@@ -191,6 +211,16 @@
                 return moment(String(value)).format('DD/MM/YYYY')
            
             },
+        },
+
+        watch: {
+            animating(val){
+                if(!val && this.NewsToUpdate.length > 0){
+                    this.news = this.NewsToUpdate
+                    this.$options.newsLenght = this.news.length
+                    this.NewsToUpdate = []
+                }
+            }
         }
 
 

@@ -4,14 +4,14 @@
 @section ('content')
 
 
- <div class="jumbotron .jumbotron-fluid prideBlue ">
+ <div class="jumbotron .jumbotron-fluid prideBlue scene_element scene_element--fadein">
     <div class="container">
         <div class="container-fluid">
           <h1 class='text-center'>{{__("News")}}</h1>
         </div>    
         </div>    
   </div>
-<main class="container">
+<main class="container m-page scene_element scene_element--fadeinup">
    
    <div class="container-fluid">
        
