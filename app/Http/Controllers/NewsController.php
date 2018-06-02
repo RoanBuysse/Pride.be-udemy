@@ -88,6 +88,8 @@ class NewsController extends Controller
         $news = News::findOrFail($id);
         // var_dump($news);
         return view('news.show', compact('news'));
+        // return response()->json('news.show', compact('news'));
+        
     }
     public function edit($id)
     {

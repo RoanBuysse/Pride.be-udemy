@@ -1,30 +1,43 @@
 <template>
     <article>
       
-        
-        <div class="row">
-           
-                <div v-for="news in news" v-bind:key="news.id" class="col-sm">
-                  
-                        <div class="card mb-4" style="width: 18rem;">
-                            <div v-for="photo in photo" v-bind:key="photo.id" v-if="news.photo_id === photo.id">
-                                <img class="card-img-top" v-bind:src="'/images/news/' + photo.photo" alt="news photo"/>
-                            </div>
-                           
-                                <div class="card-body">
-                                    <h5 class="card-title">{{news.title}}</h5>
-                                    <p class="card-text" style="min-height: 50px;">{{news.body | shorten}}</p>
-                                    <a class="btn btn pridePurple" v-bind:href=" link + '/' + news.id">More</a>
-                                        
-                                </div>
+       
+            <div class="row">
 
-                            <div class="card-footer text-muted">{{news.created.date | formatDate}}</div>
-                    
-                        </div>
-                    </div>   
+                     <transition-group
+                        @before-enter='beforeEnter'
+                        @enter='enter'
+                        @after-enter='afterEnter'
+                        @before-leave='beforeLeave'
+                        @leave='leave'
+                        @after-leave='afterLeave'
+                        
+                        >
             
-        </div>
+                    <div v-for="news in news" v-bind:key="news.id" class="col-sm">
+                    
+                            <div class="card mb-4" style="width: 18rem;">
+                                <div v-for="photo in photo" v-bind:key="photo.id" v-if="news.photo_id === photo.id">
+                                    <img class="card-img-top" v-bind:src="'/images/news/' + photo.photo" alt="news photo"/>
+                                </div>
+                            
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{news.title}}</h5>
+                                        <p class="card-text" style="min-height: 50px;">{{news.body | shorten}}</p>
+                                        <a class="btn btn pridePurple" v-bind:href=" link + '/' + news.id">{{ $t("message.More") }}</a>
+                                            
+                                    </div>
 
+                                <!-- <div class="card-footer text-muted">{{news.created.date | formatDate}}</div> -->
+                        
+                            </div>
+                        </div>   
+                    </transition-group>
+            </div>
+    
+
+
+        
         <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center">
                 <li v-bind:class="[{disabled: !pagination.prev_page_url}]" class="page-item">
@@ -74,6 +87,7 @@
             this.fetchNews();
             this.fetchPhotos();
             //   this.idtoLink();
+            // console.log(document.documentElement.lang);
             
 
 
@@ -83,6 +97,7 @@
             fetchNews(page_url) {
                 let vm = this;
                 page_url = page_url || 'api/news'
+                console.log(page_url);
                 fetch(page_url)
                     .then(res => res.json())
                     .then(res => {
@@ -119,6 +134,37 @@
                     })
 
             },
+
+            // transition
+            beforeEnter(el){
+                el.style.opacity = 0
+                el.style.left = '50%'
+
+                if(!this.animating){
+                    this.animating = true
+                }
+            },
+            enter(el, done){
+                const delay = (el.dataset.index > 9 ? 9 : el.dataset.index)*100
+
+                TweenLite.to(el, 0.5,{
+                    opacity: 1,
+                    left: 0,
+                    oncomplete: done
+                })
+            },
+            
+            afterEnter(el){
+                if(el.dataset.index == this.$options.newsLenght - 1) {
+                    this.animating.false
+                }
+            },
+
+            beforeLeave(el){},
+            leave(el, done){},
+            afterLeave(el){},
+        
+
             
 
 

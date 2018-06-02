@@ -4,14 +4,17 @@
 @section ('content')
 
 
-
+ <div class="jumbotron .jumbotron-fluid prideBlue ">
+    <div class="container">
+        <div class="container-fluid">
+          <h1 class='text-center'>{{__("News")}}</h1>
+        </div>    
+        </div>    
+  </div>
 <main class="container">
-
+   
    <div class="container-fluid">
-        <div class="jumbotron">
-        <h1>{{__("News")}}</h1>
-      
-        </div>
+       
 
         <div class="col-sm col-sm-offset-2">
         

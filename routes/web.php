@@ -34,6 +34,7 @@ Route::group(
         Route::get('/news/create', 'NewsController@create')->name('news');
         Route::post('/news/store', 'NewsController@store')->name('news');
         Route::get('/news/{id}', 'NewsController@show')->name('news');
+        Route::get('/news#/{id}', 'NewsController@show')->name('news');
         Route::get('/news/{id}/edit', 'NewsController@edit')->name('news');
         Route::patch('/news/{id}/edit', 'NewsController@update')->name('news');
         Route::delete('/news/{id}', 'NewsController@destroy')->name('news');
