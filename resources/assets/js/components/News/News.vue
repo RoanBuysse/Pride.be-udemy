@@ -6,18 +6,19 @@
            
                 <div v-for="news in news" v-bind:key="news.id" class="col-sm">
                   
-                        <div class="card mb-4" style="width: 18rem; max-height: 600px;">
+                        <div class="card mb-4" style="width: 18rem;">
                             <div v-for="photo in photo" v-bind:key="photo.id" v-if="news.photo_id === photo.id">
                                 <img class="card-img-top" v-bind:src="'/images/news/' + photo.photo" alt="news photo"/>
                             </div>
+                           
                                 <div class="card-body">
                                     <h5 class="card-title">{{news.title}}</h5>
                                     <p class="card-text" style="min-height: 50px;">{{news.body | shorten}}</p>
-                                    <a class="btn btn-primary" v-bind:href=" link + '/' + news.id">More</a>
+                                    <a class="btn btn pridePurple" v-bind:href=" link + '/' + news.id">More</a>
                                         
                                 </div>
 
-                            <!-- <div class="card-footer text-muted">{{news.created.date}}</div> -->
+                            <div class="card-footer text-muted">{{news.created.date | formatDate}}</div>
                     
                         </div>
                     </div>   
@@ -27,7 +28,7 @@
         <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center">
                 <li v-bind:class="[{disabled: !pagination.prev_page_url}]" class="page-item">
-                    <a class="page-link" href="#" @click="fetchNews(pagination.prev_page_url)">Previous</a>
+                    <a class="page-link pridePurpletxt" href="#" @click="fetchNews(pagination.prev_page_url)">Previous</a>
                 </li>
 
                 <li class="page-item disabled">
@@ -35,7 +36,7 @@
                 </li>
 
                 <li v-bind:class="[{disabled: !pagination.next_page_url}]" class="page-item">
-                    <a class="page-link" href="#" @click="fetchNews(pagination.next_page_url)">Next</a>
+                    <a class="page-link pridePurpletxt" href="#" @click="fetchNews(pagination.next_page_url)">Next</a>
                 </li>
             </ul>
         </nav>
@@ -135,7 +136,15 @@
                  return value.substring(0,200)+'...'
             }
            else{return value}
-            }
+            },
+            
+            
+            formatDate: function (value) {
+                if (!value) return ''
+                value = value.toString()
+                return moment(String(value)).format('DD/MM/YYYY')
+           
+            },
         }
 
 
