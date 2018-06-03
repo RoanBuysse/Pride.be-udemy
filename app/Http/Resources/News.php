@@ -4,6 +4,10 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use App\Http\Resources\NewsCategory as NewsCategoryResource;
+
+
+
 class News extends JsonResource
 {
      /**
@@ -22,6 +26,14 @@ class News extends JsonResource
         'title' => $this->titleNl,
         'body' => $this->bodyNl,
         'photo_id' => $this->photo_id,
+        'photo'=> $this->photo,
+        // 'category'=> (string)$this->category->pluck('nameNl'),
+        'category'=> collect($this->category->first()),
+        // 'category'=> $this->whenPivotLoaded('news_news_category', function()
+        // {
+        //     return $this->pivot->id;
+        // }),
+    //    dd($this->category),
         'created' => $this->created_at
         ];
         }
@@ -33,6 +45,7 @@ class News extends JsonResource
         'title' => $this->titleEn,
         'body' => $this->bodyEn,
         'photo_id' => $this->photo_id,
+        'photo'=> new PhotoResource($this->photo),
         'created' => $this->created_at
         ];
         }
@@ -44,6 +57,7 @@ class News extends JsonResource
         'title' => $this->titleFr,
         'body' => $this->bodyFr,
         'photo_id' => $this->photo_id,
+        'photo'=> new PhotoResource($this->photo),
         'created' => $this->created_at
         ];
         }

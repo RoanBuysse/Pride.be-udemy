@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Session;
 use App\NewsCategory;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use App\Http\Resources\NewsCategory as NewsCategoryResource;
 
 class NewsCategoryController extends Controller
 
@@ -14,8 +15,7 @@ class NewsCategoryController extends Controller
 
     public function __construct()
     {
-        $this->middleware('isAdmin',['except' => ['show']]);
-    
+        $this->middleware('isAdmin',['only' => ['create','edit']]);
     }
     /**
      * Display a listing of the resource.
@@ -24,8 +24,9 @@ class NewsCategoryController extends Controller
      */
     public function index()
     {
-        $categories = NewsCategory::latest()->get();
-        return view('categories.news.index', compact('categories'));
+        $categories = NewsCategory::orderBy('created_at', 'desc')->paginate(5000);
+        // return view('categories.news.index', compact('categories'));
+        return NewsCategoryResource::collection($categories);
     }
 
     /**

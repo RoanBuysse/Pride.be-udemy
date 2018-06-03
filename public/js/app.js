@@ -65655,29 +65655,30 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         var _ref;
 
         return _ref = {
+            loading: false,
             news: [],
-            photo: [],
-            NewsToUpdate: []
+            search: ''
         }, _defineProperty(_ref, 'news', {
             id: '',
             title: '',
             body: '',
+            category: [],
+            photo: '',
             photo_id: '',
             created: ''
-        }), _defineProperty(_ref, 'photo', {
-            id: '',
-            photo: ''
         }), _defineProperty(_ref, 'news_id', ''), _defineProperty(_ref, 'photo_id', ''), _defineProperty(_ref, 'pagination', {}), _defineProperty(_ref, 'link', window.location.href), _defineProperty(_ref, 'edit', false), _ref;
     },
     created: function created() {
         this.fetchNews();
-        this.fetchPhotos();
+        // this.fetchPhotos();
         //   this.idtoLink();
         // console.log(document.documentElement.lang);
 
@@ -65688,6 +65689,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         fetchNews: function fetchNews(page_url) {
             var _this = this;
 
+            this.loading = true;
             var vm = this;
             page_url = page_url || 'api/news';
             console.log(page_url);
@@ -65696,12 +65698,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             }).then(function (res) {
 
                 _this.news = res.data;
-                _this.$options.newsLenght = res.data.length;
-                console.log("ok");
+                _this.loading = false;
+                // this.$options.newsLenght = res.data.length
+                // console.log("ok");
+
 
                 vm.makePagination(res.meta, res.links);
                 // this.news.body = res.data.body.substring(0,100);
-                // console.log(res.data.body);
+                console.log(res.data.body);
             }).catch(function (err) {
                 return console.log(err);
             });
@@ -65716,15 +65720,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
             this.pagination = pagination;
             //   console.log(pagination);
-        },
-        fetchPhotos: function fetchPhotos() {
-            var _this2 = this;
-
-            fetch('api/photo').then(function (res) {
-                return res.json();
-            }).then(function (res) {
-                _this2.photo = res.data;
-            });
         }
     },
 
@@ -65744,17 +65739,36 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             value = value.toString();
             return moment(String(value)).format('DD/MM/YYYY');
         }
+
     },
 
-    watch: {
-        animating: function animating(val) {
-            if (!val && this.NewsToUpdate.length > 0) {
-                this.news = this.NewsToUpdate;
-                this.$options.newsLenght = this.news.length;
-                this.NewsToUpdate = [];
-            }
-        }
-    }
+    computed: {}
+    // filteredNews: function(){
+    //     // var self=this;
+    //     var newsArr = Object.values(this.news);
+    //     var newsArr = $.map(newsArr, function(el) { return el });
+    //     return newsArr.filter(function(newsArr){
+    //         console.log( newsArr);
+    //         // return newsArr.title.toLowerCase().indexOf(self.search.toLowerCase())>=0;
+    //         });
+
+    //     console.log( newsArr);
+    //     // return newsArr.filter((newsArr)=> {
+    //     //     return newsArr.title.match(this.search);
+    //     // })
+    // }
+
+
+    // watch: {
+    //     animating(val){
+    //         if(!val && this.NewsToUpdate.length > 0){
+    //             this.news = this.NewsToUpdate
+    //             this.$options.newsLenght = this.news.length
+    //             this.NewsToUpdate = []
+    //         }
+    //     }
+    // },
+
 
 });
 
@@ -65767,65 +65781,91 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("article", [
-    _c(
-      "div",
-      { staticClass: "row" },
-      _vm._l(_vm.news, function(news) {
-        return _c("div", { key: news.id, staticClass: "col-sm" }, [
-          _c(
+    _c("div", { staticClass: "filter" }, [
+      _vm._v("\n        Filter: "),
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.search,
+            expression: "search"
+          }
+        ],
+        attrs: { type: "text", placeholder: "search news" },
+        domProps: { value: _vm.search },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.search = $event.target.value
+          }
+        }
+      }),
+      _vm._v(" "),
+      !_vm.loading
+        ? _c(
             "div",
-            {
-              staticClass: "card mb-4 scene_element scene_element--fadeinup",
-              staticStyle: { width: "18rem" }
-            },
-            [
-              _vm._l(_vm.photo, function(photo) {
-                return news.photo_id === photo.id
-                  ? _c("div", { key: photo.id }, [
-                      _c("img", {
-                        staticClass: "card-img-top",
-                        attrs: {
-                          src: "/images/news/" + photo.photo,
-                          alt: "news photo"
-                        }
-                      })
+            { staticClass: "row result" },
+            _vm._l(_vm.news, function(news) {
+              return _c("div", { key: news.id, staticClass: "col-sm" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "card mb-4 scene_element scene_element--fadeinup",
+                    staticStyle: { width: "18rem" }
+                  },
+                  [
+                    news.photo != null
+                      ? _c("img", {
+                          staticClass: "card-img-top",
+                          attrs: {
+                            src: "/images/news/" + news.photo.photo,
+                            alt: "news photo"
+                          }
+                        })
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "card-body" }, [
+                      _c("h5", { staticClass: "card-title" }, [
+                        _vm._v(_vm._s(news.title))
+                      ]),
+                      _vm._v(
+                        "\n                                        " +
+                          _vm._s(news.category.nameNl) +
+                          "\n                                        "
+                      ),
+                      _c(
+                        "p",
+                        {
+                          staticClass: "card-text",
+                          staticStyle: { "min-height": "50px" }
+                        },
+                        [_vm._v(_vm._s(_vm._f("shorten")(news.body)))]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "a",
+                        {
+                          staticClass: "btn btn pridePurple",
+                          attrs: { href: _vm.link + "/" + news.id }
+                        },
+                        [_vm._v(_vm._s(_vm.$t("message.More")))]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "card-footer text-muted" }, [
+                      _vm._v(_vm._s(_vm._f("formatDate")(news.created.date)))
                     ])
-                  : _vm._e()
-              }),
-              _vm._v(" "),
-              _c("div", { staticClass: "card-body" }, [
-                _c("h5", { staticClass: "card-title" }, [
-                  _vm._v(_vm._s(news.title))
-                ]),
-                _vm._v(" "),
-                _c(
-                  "p",
-                  {
-                    staticClass: "card-text",
-                    staticStyle: { "min-height": "50px" }
-                  },
-                  [_vm._v(_vm._s(_vm._f("shorten")(news.body)))]
-                ),
-                _vm._v(" "),
-                _c(
-                  "a",
-                  {
-                    staticClass: "btn btn pridePurple",
-                    attrs: { href: _vm.link + "/" + news.id }
-                  },
-                  [_vm._v(_vm._s(_vm.$t("message.More")))]
+                  ]
                 )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "card-footer text-muted" }, [
-                _vm._v(_vm._s(_vm._f("formatDate")(news.created.date)))
               ])
-            ],
-            2
+            })
           )
-        ])
-      })
-    ),
+        : _vm._e()
+    ]),
     _vm._v(" "),
     _c("nav", { attrs: { "aria-label": "Page navigation example" } }, [
       _c("ul", { staticClass: "pagination justify-content-center" }, [

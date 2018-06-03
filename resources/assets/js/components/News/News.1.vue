@@ -3,7 +3,7 @@
         <div class="filter">
             Filter: <input type="text" v-model="search" placeholder="search news">  
             
-            <div v-if="!loading" class="row result">
+            <div class="row result">
 
                         <!-- <transition-group  class="row"
                             @before-enter='beforeEnter'
@@ -18,13 +18,12 @@
                         <div v-for="news in news" v-bind:key="news.id" class="col-sm">
                         
                                 <div class="card mb-4 scene_element scene_element--fadeinup" style="width: 18rem;">
-                                   
-                                        <img v-if="news.photo != null" class="card-img-top" v-bind:src="'/images/news/' + news.photo.photo" alt="news photo"/>
-                                  
-                                  
+                                    <div v-for="photo in photo" v-bind:key="photo.id" v-if="news.photo_id === photo.id">
+                                        <img class="card-img-top" v-bind:src="'/images/news/' + photo.photo" alt="news photo"/>
+                                    </div>
+                                
                                         <div class="card-body">
                                             <h5 class="card-title">{{news.title}}</h5>
-                                            {{news.category.nameNl}}
                                             <p class="card-text" style="min-height: 50px;">{{news.body | shorten}}</p>
                                             <a class="btn btn pridePurple" v-bind:href=" link + '/' + news.id">{{ $t("message.More") }}</a>
                                                 
@@ -63,17 +62,21 @@
     export default {
         data() {
             return {
-                loading: false,
                 news: [],
+                photo: [],
+                NewsToUpdate: [],
                 search: '',
                 news: {
                     id: '',
                     title: '',
                     body: '',
-                    category: [],
-                    photo: '',
                     photo_id: '',
                     created: ''
+                },
+
+                photo: {
+                    id: '',
+                    photo: ''
                 },
                 news_id: '',
                 photo_id: '',
@@ -85,7 +88,7 @@
         },
         created() {
             this.fetchNews();
-            // this.fetchPhotos();
+            this.fetchPhotos();
             //   this.idtoLink();
             // console.log(document.documentElement.lang);
             
@@ -95,7 +98,6 @@
 
         methods: {
             fetchNews(page_url) {
-                this.loading = true;
                 let vm = this;
                 page_url = page_url || 'api/news'
                 console.log(page_url);
@@ -104,8 +106,7 @@
                     .then(res => {
                     
                             this.news = res.data;
-                            this.loading = false;
-                            // this.$options.newsLenght = res.data.length
+                            this.$options.newsLenght = res.data.length
                             // console.log("ok");
                         
                         
@@ -130,6 +131,17 @@
 
             },
 
+            fetchPhotos() {
+                fetch('api/photo')
+                    .then(res => res.json())
+                    .then(res => {
+                        this.photo = res.data;
+
+
+
+                    })
+
+            },
 
             // transition
             // beforeEnter(el){
