@@ -8,7 +8,7 @@ class Photo extends Model
 {
 
     protected $fillable = [
-         'photo', 'title',
+         'nameNl', 'nameEn', 'nameFr'
     ];
     public function news()
     {

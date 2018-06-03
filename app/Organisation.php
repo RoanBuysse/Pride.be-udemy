@@ -4,11 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Organiser extends Model
+class Organisation extends Model
 {
    
     protected $fillable = [
-        'organiser',
+        'organiser'
    ];
    public function news()
    {
