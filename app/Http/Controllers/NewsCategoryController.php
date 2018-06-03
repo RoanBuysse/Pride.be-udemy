@@ -25,7 +25,12 @@ class NewsCategoryController extends Controller
     public function index()
     {
         $categories = NewsCategory::orderBy('created_at', 'desc')->paginate(5000);
-        // return view('categories.news.index', compact('categories'));
+        return view('categories.news.index', compact('categories'));
+    }
+
+    public function indexApi()
+    {
+        $categories = NewsCategory::orderBy('created_at', 'desc')->paginate(5000);
         return NewsCategoryResource::collection($categories);
     }
 

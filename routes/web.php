@@ -57,8 +57,11 @@ Route::group(
         Route::resource('news_categories', 'NewsCategoryController' );
         Route::resource('events_categories', 'EventsCategoryController' );
 
+        //organisation
+        Route::resource('organisations', 'OrganisationController');
+
         //users
-        Route::resource('users', 'UserController' );
+        Route::resource('users', 'UserController');
 
         //likes
         Route::post('/events/{id}/favourites', 'AgendaController@store')->name('agenda.fav.store');

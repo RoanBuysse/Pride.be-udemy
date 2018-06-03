@@ -14,7 +14,7 @@ class NewsController extends Controller
     {
       $this->middleware('isWriter',['only' => ['create','edit']]);
     }
-    public function index(Request $request)
+    public function indexApi(Request $request)
     {
         $news = News::orderBy('created_at', 'desc')->paginate(10);
         

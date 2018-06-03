@@ -16,6 +16,11 @@ class Events extends Model
         return $this->belongsToMany(Eventscategory::class, 'events_events_category');
     }
 
+    public function organisation()
+    {
+        return $this->belongsToMany(organisation::class, 'events_organisation');
+    }
+
     public function photo()
     {
         return $this->belongsTo(Photo::class);

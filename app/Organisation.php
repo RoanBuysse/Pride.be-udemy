@@ -6,17 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Organisation extends Model
 {
-   
-    protected $fillable = [
-        'organiser'
-   ];
-   public function news()
-   {
-       $this->belongsTo(News::class);
-   }
-
-   public function Events()
-   {
-       $this->belongsTo(Events::class);
-   }
+    protected $fillable=['nameNl', 'nameFr', 'nameEn', 'slug_nl', 'slug_fr', 'slug_en'];
+  
+    public function events()
+    {
+        return $this->belongsToMany(Events::class, 'events_organisation');
+    }
 }

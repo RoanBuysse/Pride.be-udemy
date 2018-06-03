@@ -7,6 +7,7 @@ use App\Events;
 
 
 use App\EventsCategory;
+use App\Organisation;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use App\Photo;
 use Carbon\Carbon;
