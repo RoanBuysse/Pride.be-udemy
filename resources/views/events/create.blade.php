@@ -26,25 +26,35 @@
             {!! Form::time("time", null, ['class' => 'form-control']) !!}
         </div> 
         
-        {{--  <div class="form-group">
-            {!! Form::label("organiser", "Organiser:") !!}
-            {!! Form::text("organiser", null, ['class' => 'form-control']) !!}
-        </div>  --}}
-
+    
         <div class="form-group">
             
             {!! Form::label("events_category_id", "Category:")!!}
             
             {!! Form::select("events_category_id[]", $events_categories, null, ['id' => 'tag_list','class'=> 'form-control']) !!}
-            
-
         </div>
+
+        <div class="form-group">
+            
+                {!! Form::label("organisation_id ", "Organisation:")!!}
+                
+                {!! Form::select("organisation_id[]", $organisations, null, ['id' => 'tag_list','class'=> 'form-control']) !!}
+                
+    
+            </div>
 
 
         <div class="form-group">
             {!! Form::label("photo_id", "Featured Image:") !!}
             {!! Form::file("photo_id",['class' => 'form-control']) !!}
            
+        </div>
+
+
+        <div class="form-group">
+                {!! Form::label("location", "location:") !!}
+                {!! Form::text("location", null, ['class' => 'form-control']) !!}
+               
         </div>
 
         

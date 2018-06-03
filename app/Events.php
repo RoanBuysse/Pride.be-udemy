@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Events extends Model
 {
     protected $fillable = [
-        'date', 'time', 'titleNl','CategorieNl', 'bodyNl', 'titleFr', 'bodyFr','CategorieFr', 'titleEn', 'bodyEn', 'CategorieEn', 'photo_id',
+        'date', 'location', 'time', 'titleNl','CategorieNl', 'bodyNl', 'titleFr', 'bodyFr','CategorieFr', 'titleEn', 'bodyEn', 'CategorieEn', 'photo_id',
     ];
 
 
@@ -18,7 +18,7 @@ class Events extends Model
 
     public function organisation()
     {
-        return $this->belongsToMany(organisation::class, 'events_organisation');
+        return $this->belongsToMany(Organisation::class, 'events_organisation');
     }
 
     public function photo()

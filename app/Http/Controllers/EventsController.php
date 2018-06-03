@@ -31,17 +31,34 @@ class EventsController extends Controller
 
     public function create()
     { 
-        if(LaravelLocalization::getCurrentLocale()=='nl')
-        { $events_categories  = EventsCategory::pluck('nameNl','id');
-         return view('events.create', compact('events_categories'));
+        // if(LaravelLocalization::getCurrentLocale()=='nl')
+        // { 
+        // $events_categories  = EventsCategory::pluck('nameNl','id');
+        //  return view('events.create', compact('events_categories'));
+        // }
+        // if(LaravelLocalization::getCurrentLocale()=='fr')
+        // { $events_categories  = EventsCategory::pluck('nameFr','id');
+        //  return view('events.create', compact('events_categories'));
+        // }
+        // if(LaravelLocalization::getCurrentLocale()=='en')
+        // { $events_categories  = EventsCategory::pluck('nameEn','id');
+        //  return view('events.create', compact('events_categories'));
+        // }
+        
+         if(LaravelLocalization::getCurrentLocale()=='nl')
+        {   $organisations  = Organisation::pluck('nameNl','id');
+            $events_categories  = EventsCategory::pluck('nameNl','id');
+         return view('events.create', compact('organisations', 'events_categories'));
         }
         if(LaravelLocalization::getCurrentLocale()=='fr')
-        { $events_categories  = EventsCategory::pluck('nameFr','id');
-         return view('events.create', compact('events_categories'));
+        {   $events_categories  = EventsCategory::pluck('nameFr','id');
+            $organisations  = Organisation::pluck('nameFr','id');
+         return view('events.create', compact('organisations', 'events_categories'));
         }
         if(LaravelLocalization::getCurrentLocale()=='en')
-        { $events_categories  = EventsCategory::pluck('nameEn','id');
-         return view('events.create', compact('events_categories'));
+        {   $events_categories  = EventsCategory::pluck('nameEn','id');
+            $organisations  = Organisation::pluck('nameEn','id');
+         return view('events.create', compact('organisations', 'events_categories'));
         }
         
         }
@@ -91,6 +108,10 @@ class EventsController extends Controller
             $events->category()->sync($categoryIds);
         }
 
+        if ($organisationIds = $request->organisation_id ){
+            $events->organisation()->sync($organisationIds);
+        }
+
         Session::flash('flash_message', 'Event item succesfully created');
 
         return redirect('/events');
@@ -120,7 +141,21 @@ class EventsController extends Controller
         { $events_categories  = EventsCategory::pluck('nameEn','id');
     
         }
-        return view('events.edit', compact('events', 'events_categories'));
+
+        if(LaravelLocalization::getCurrentLocale()=='nl')
+        { $organisations  = Organisation::pluck('nameNl','id');
+        
+        }
+        if(LaravelLocalization::getCurrentLocale()=='fr')
+        { $organisations  = Organisation::pluck('nameFr','id');
+        
+        }
+        if(LaravelLocalization::getCurrentLocale()=='en')
+        { $organisations  = Organisation::pluck('nameEn','id');
+    
+        }
+
+        return view('events.edit', compact('events', 'events_categories', 'organisations'));
     }
 
 
@@ -167,6 +202,11 @@ class EventsController extends Controller
             $events->category()->sync($categoryIds);
         }
 
+
+        if ($organisationIds = $request->events_organisation_id ){
+            $events->organisation()->sync($organisationIds);
+        }
+
         Session::flash('flash_message', 'Events item succesfully updated');
 
         return redirect('/events');
@@ -177,8 +217,15 @@ class EventsController extends Controller
     {   
         $events = Events::findOrFail($id);
         $events->delete($request->all());
+        
         $categoryIds = $request->events_category_id;
         $events->category()->detach($categoryIds);
+        
+        if ($organisationIds = $request->events_organisation_id ){
+            $events->organisation()->detach($organisationIds);
+        }
+
+
         if($events->photo){
             unlink('images/events/'.$events->photo->photo);
             $events->photo()->delete('photo');
