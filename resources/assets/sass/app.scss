@@ -27,6 +27,21 @@
 
   }
 
+  .scene_element_slow {
+    animation-duration: 1.5s;
+    transition-timing-function: ease-in;
+    animation-fill-mode: both;
+
+  }
+
+
+  .scene_element_vslow {
+    animation-duration: 3s;
+    transition-timing-function: ease-in;
+    animation-fill-mode: both;
+
+  }
+
   /** An element that fades in */
   .scene_element--fadein {
     animation-name: fadeIn;

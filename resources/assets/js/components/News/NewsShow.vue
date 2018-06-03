@@ -46,7 +46,7 @@
 
         
         <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-center scene_element_slow scene_element--fadeinup">
+            <ul class="pagination justify-content-center">
                 <li v-bind:class="[{disabled: !pagination.prev_page_url}]" class="page-item">
                     <a class="page-link pridePurpletxt" href="#" @click="fetchNews(pagination.prev_page_url)">Previous</a>
                 </li>

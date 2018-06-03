@@ -23,7 +23,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('/news', 'NewsController@index');
 Route::get('/photo', 'PhotoController@index');
 Route::get('/news_categories', 'NewsCategoryController@index');
-Route::get('/newsPivot', 'NewsPivotController@index');
 
      
 

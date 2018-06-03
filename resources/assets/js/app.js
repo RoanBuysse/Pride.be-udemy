@@ -38,14 +38,11 @@ const messages = {
     locale: document.documentElement.lang, // set locale
     messages // set locale messages
   })
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-
 
 Vue.component('News', require('./components/News/News.vue'));
+Vue.component('Show', require('./components/News/NewsShow.vue'));
+Vue.component('Page_end', require('./components/FooterPage.vue'));
+
 
 
 const app = new Vue({
@@ -55,4 +52,5 @@ const app = new Vue({
 });
 
 
+$('div:empty').hide();
 

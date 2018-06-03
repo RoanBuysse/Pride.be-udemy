@@ -28,6 +28,33 @@
                       @endforeach
                       <p class="card-text float-left mt-2"><small class="text-muted">{{date('d-m-Y', strtotime($news->created_at))}}</p>
                       @endif 
+                    
+
+
+                  
+                    {{--  dutch  --}}
+                    @if(LaravelLocalization::getCurrentLocale()=='en')
+                      <h3 class="card-title">{{$news->titleEn}}</h3>
+                      <p class="card-text">{{$news->bodyEn}}</p>
+                      @foreach($news->category as $category)
+                      <p class="card-text float-right mt-2"><small class="text-muted">{{$category->nameEn}}</small></p>
+                      @endforeach
+                      <p class="card-text float-left mt-2"><small class="text-muted">{{date('d-m-Y', strtotime($news->created_at))}}</p>
+                      @endif 
+                    
+
+
+
+                  
+                    {{--  dutch  --}}
+                    @if(LaravelLocalization::getCurrentLocale()=='fr')
+                      <h3 class="card-title">{{$news->titleFr}}</h3>
+                      <p class="card-text">{{$news->bodyFr}}</p>
+                      @foreach($news->category as $category)
+                      <p class="card-text float-right mt-2"><small class="text-muted">{{$category->nameFr}}</small></p>
+                      @endforeach
+                      <p class="card-text float-left mt-2"><small class="text-muted">{{date('d-m-Y', strtotime($news->created_at))}}</p>
+                      @endif 
                     </div>
                   </div>
                       

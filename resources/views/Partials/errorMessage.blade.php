@@ -3,5 +3,6 @@
         @foreach($errors->all() as $error)
         <li style="list_style-type:none;">{{$error}}</li>
         @endforeach
-        @endif
+
+    @endif
     </div>

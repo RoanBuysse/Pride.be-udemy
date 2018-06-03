@@ -81,7 +81,7 @@ class NewsController extends Controller
        
        Session::flash('flash_message', 'News item succesfully created');
        
-       return redirect('/news');
+       return redirect('/admin');
     }
     public function show($id)
     {
@@ -155,7 +155,7 @@ class NewsController extends Controller
         }
         Session::flash('flash_message', 'News item succesfully updated');
 
-        return redirect('/news');
+        return redirect('/admin');
        
         
     }
@@ -170,6 +170,6 @@ class NewsController extends Controller
             $news->photo()->delete('photo');
         }
         Session::flash('flash_message', 'news item succesfully deleted');
-        return back();
+        return redirect('/admin');
     }
 }

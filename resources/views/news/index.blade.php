@@ -14,11 +14,20 @@
 <main class="container m-page scene_element scene_element--fadeinup">
    
    <div class="container-fluid">
+      
        
 
         <div class="col-sm col-sm-offset-2">
+
+           <div class="dropdown mb-4">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Dropdown button
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="#">Action</a>
+            </div>
+          </div>
         
-          @include('partials.flashMessage')
             
           
               <News></News>

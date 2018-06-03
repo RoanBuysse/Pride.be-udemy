@@ -27,13 +27,7 @@ class News extends JsonResource
         'body' => $this->bodyNl,
         'photo_id' => $this->photo_id,
         'photo'=> $this->photo,
-        // 'category'=> (string)$this->category->pluck('nameNl'),
         'category'=> collect($this->category->first()),
-        // 'category'=> $this->whenPivotLoaded('news_news_category', function()
-        // {
-        //     return $this->pivot->id;
-        // }),
-    //    dd($this->category),
         'created' => $this->created_at
         ];
         }
@@ -45,7 +39,8 @@ class News extends JsonResource
         'title' => $this->titleEn,
         'body' => $this->bodyEn,
         'photo_id' => $this->photo_id,
-        'photo'=> new PhotoResource($this->photo),
+        'photo'=> $this->photo,
+        'category'=> collect($this->category->first()),
         'created' => $this->created_at
         ];
         }
@@ -57,7 +52,8 @@ class News extends JsonResource
         'title' => $this->titleFr,
         'body' => $this->bodyFr,
         'photo_id' => $this->photo_id,
-        'photo'=> new PhotoResource($this->photo),
+        'photo'=> $this->photo,
+        'category'=> collect($this->category->first()),
         'created' => $this->created_at
         ];
         }

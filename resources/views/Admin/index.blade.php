@@ -14,7 +14,7 @@
 
     <div class="col-sm-8 col-sm-offset-2 admin-buttons">
         
-        
+            @include('partials.flashMessage')
         <h2>News</h2>
         <a href="{{url('/news/create')}}" class="btn btn-warning mijnProg" role="button">Add newsItem</a>
         <br>
