@@ -26,6 +26,7 @@ class Events extends JsonResource
         'id' => $this->id,
         'title' => $this->titleNl,
         'body' => $this->bodyNl,
+         
         'photo_id' => $this->photo_id,
         'photo'=> $this->photo,
         'category'=> collect($this->category->first()),

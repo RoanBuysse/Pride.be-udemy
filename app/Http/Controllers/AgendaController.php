@@ -6,6 +6,8 @@ use App\favouriteables;
 use Illuminate\Support\Collection;
 use Session;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Resources\Agenda as AgendaResource;
 
 class AgendaController extends Controller
 {
@@ -51,7 +53,7 @@ public function store(Request $request, $id)
 public function index(Request $request)
 {
     $newCollection = new Collection;
-    $idSignedin = $request->user()->id;
+    $idSignedin = Auth::id();
     $getEvents = Events::all();
 
     $likes= favouriteables::where('user_id', '=', $idSignedin)->get();
@@ -71,45 +73,11 @@ public function index(Request $request)
     }
  
     return view('Agenda.index', compact('newCollection'));
-    // dd($newCollection);
-   
-    
-    
-    
-    
-    
-    
-    // $favouriteables = favouriteables::get()->where('user_id', $idSignedin);
-    // foreach($favouriteables as $favouriteable)
-    // {
-    // $favouriteables_events_ids [] = $favouriteable->events_id;
-    // }
-   
-    // $likes = $getEvents->filter(function ($value, $key) {
-    //     return $value->id == $key;
-    // });
+}
 
-
-    
-    
-  
-    // $getEvents = Events::get();
-    // // $getEvents->push($getEvents);
-    
-    
-    // // foreach($favouriteables_events_id as $favouriteables_events)
-    // // {
-    // // $getEvents = Events::latest()->get()->where('id', $favouriteables_events);
-    // // $newCollection->push($getEvents);
-    // // }
-    
-   
-   
-    
- 
- 
-
-	// return view('Agenda.index', compact('favouriteables' , 'getEvents'));
-    // dd($likes);
+public function indexApi(Request $request)
+{
+    $agenda = favouriteables::orderBy('created_at', 'desc')->paginate(10);
+    return AgendaResource::collection($agenda);
 }
 }

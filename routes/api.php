@@ -25,6 +25,7 @@ Route::get('/news_categories', 'NewsCategoryController@indexApi');
 Route::get('/events_categories', 'EventsCategoryController@indexApi');
 Route::get('/events', 'EventsController@indexApi');
 Route::get('/organisations', 'OrganisationController@indexApi');
+Route::get('/agenda', 'AgendaController@indexApi');
 
 
      
