@@ -41,7 +41,9 @@ Route::group(
         Route::patch('/news/{id}/edit', 'NewsController@update')->name('news');
         Route::delete('/news/{id}', 'NewsController@destroy')->name('news');
         // events
-        Route::get('/events', 'EventsController@index')->name('events');
+        // Route::get('/events', 'EventsController@index')->name('events');
+        Route::get('/events', function () {
+            return view('events/index');});
         Route::get('/events/create', 'EventsController@create')->name('events');
         Route::post('/events/store', 'EventsController@store')->name('events');
         Route::get('/events/{id}', 'EventsController@show')->name('events');

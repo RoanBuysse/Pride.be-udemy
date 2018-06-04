@@ -22,6 +22,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('/news', 'NewsController@indexApi');
 Route::get('/news_categories', 'NewsCategoryController@indexApi');
+Route::get('/events_categories', 'EventsCategoryController@indexApi');
+Route::get('/events', 'EventsController@indexApi');
+Route::get('/organisations', 'OrganisationController@indexApi');
+
 
      
 

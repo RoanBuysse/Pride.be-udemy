@@ -8,8 +8,8 @@ body {
 
 /* colors */
 .pridePurple{
-    background-color:#660066;
-    color: white; 
+    background-color:#660066 !important;
+    color: white !important; 
 }
 
 .pridePurpletxt{
@@ -17,16 +17,16 @@ body {
 }
 
 .pridePurple:hover {
-    color: black;
+    color: black !important;
 }
 
 
 .prideOrange{
-    background-color:#FF6600;
-    color: white;
+    background-color:#BA2C03 !important;
+    color: white !important;
 }
 .prideOrange:hover {
-    color: black;
+    color: black !important;
 }
 
 .prideBlue{

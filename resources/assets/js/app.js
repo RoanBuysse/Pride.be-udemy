@@ -40,6 +40,7 @@ const messages = {
   })
 
 Vue.component('News', require('./components/News/News.vue'));
+Vue.component('News', require('./components/Events/Events.vue'));
 Vue.component('Show', require('./components/News/NewsShow.vue'));
 Vue.component('Page_end', require('./components/FooterPage.vue'));
 

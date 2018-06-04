@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use App\Events;
 use App\favouriteables;
 use Illuminate\Support\Collection;
-
+use Session;
 use Illuminate\Http\Request;
 
 class AgendaController extends Controller
@@ -13,7 +13,7 @@ class AgendaController extends Controller
 public function store(Request $request, $id)
 {
 	$request->user()->favouriteEvents()->syncWithoutDetaching([$id]);
- 
+    Session::flash('flash_message', 'added to agenda');
 	return back();
 }
 

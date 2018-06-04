@@ -6,14 +6,14 @@ use Illuminate\Http\Request;
 use Session;
 use App\Organisation;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
-// use App\Http\Resources\Organisation as OrganisationResource;
+use App\Http\Resources\Organisation as OrganisationResource;
 
 class OrganisationController extends Controller
 {
 
     public function __construct()
     {
-        $this->middleware('isAdmin',['except' => ['show']]);
+        $this->middleware('isAdmin',['only' => ['edit', 'create']]);
     
     }
     /**
@@ -27,6 +27,12 @@ class OrganisationController extends Controller
         return view('organisation.index', compact('organisations'));
     }
     
+
+    public function indexApi()
+    {
+        $organisations = Organisation::orderBy('created_at', 'desc')->paginate(5000);
+        return OrganisationResource::collection($organisations);
+    }
 
     /**
      * Show the form for creating a new resource.

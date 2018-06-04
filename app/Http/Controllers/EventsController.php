@@ -4,27 +4,27 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Events;
-
-
 use App\EventsCategory;
 use App\Organisation;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use App\Photo;
 use Carbon\Carbon;
 use Session;
+use App\Http\Resources\Events as EventsResource;
 class EventsController extends Controller
 {
 
     public function __construct()
     {
-        $this->middleware('isAdmin',['except' => ['index','show']]);
+        $this->middleware('isAdmin',['only' => ['create','edit']]);
     
     }
 
-    public function index()
+    public function indexApi()
     {
-        $events = Events::latest()->get();
-        return view('events.index' , compact('events'));
+        $events = Events::orderBy('created_at', 'desc')->paginate(10);
+        // 
+        return EventsResource::collection($events);
         // dd($news);
         // dd($newstranslation);
     }

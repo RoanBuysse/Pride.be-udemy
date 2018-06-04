@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Http\Resources\EventsCategory as EventsCategoryResource;
 use App\EventsCategory;
 use Session;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -13,7 +13,7 @@ class EventsCategoryController extends Controller
 
     public function __construct()
     {
-        $this->middleware('isAdmin',['except' => ['show']]);
+        $this->middleware('isAdmin',['only' => ['create','edit']]);
     
     }
     /**
@@ -27,6 +27,12 @@ class EventsCategoryController extends Controller
         return view('categories.events.index', compact('categories'));
     }
     
+
+    public function indexApi()
+    {
+        $categories = EventsCategory::orderBy('created_at', 'desc')->paginate(5000);
+        return EventsCategoryResource::collection($categories);
+    }
 
     /**
      * Show the form for creating a new resource.
